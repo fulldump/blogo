@@ -2,12 +2,8 @@ package main
 
 import (
 	"encoding/json"
-
 	"net/http"
-
-	"strconv"
-
-	"fmt"
+	"strings"
 
 	"github.com/fulldump/golax"
 )
@@ -17,12 +13,12 @@ type Article struct {
 	Content string
 }
 
-var articles = []Article{
-	{
+var articles = map[string]Article{
+	"uno": {
 		Title:   "Uno",
 		Content: "1111111",
 	},
-	{
+	"dos": {
 		Title:   "Dos",
 		Content: "2222222",
 	},
@@ -36,7 +32,13 @@ func main() {
 		Node("articles").
 		Method("GET", func(c *golax.Context) {
 
-			json.NewEncoder(c.Response).Encode(articles)
+			l := []Article{}
+
+			for _, a := range articles {
+				l = append(l, a)
+			}
+
+			json.NewEncoder(c.Response).Encode(l)
 
 		}).
 		Method("POST", func(c *golax.Context) {
@@ -45,7 +47,9 @@ func main() {
 
 			json.NewDecoder(c.Request.Body).Decode(&a)
 
-			articles = append(articles, a)
+			u := strings.ToLower(a.Title)
+
+			articles[u] = a
 
 			c.Response.WriteHeader(http.StatusCreated)
 
@@ -54,23 +58,31 @@ func main() {
 	node_articles.
 		Node("{article_id}").
 		Method("GET", func(c *golax.Context) {
-			article_id, err := strconv.Atoi(c.Parameters["article_id"])
+			article_id := c.Parameters["article_id"]
 
-			if err != nil {
-				c.Response.WriteHeader(http.StatusBadRequest)
-				fmt.Println("Error parsing URL parameter `article_id`", err)
-				return
-			}
+			a, found := articles[article_id]
 
-			if article_id >= len(articles) || article_id < 0 {
+			if !found {
 				c.Response.WriteHeader(http.StatusNotFound)
 				return
 			}
 
-			a := articles[article_id]
-
 			json.NewEncoder(c.Response).Encode(a)
 
+		}).
+		Method("DELETE", func(c *golax.Context) {
+			article_id := c.Parameters["article_id"]
+
+			_, found := articles[article_id]
+
+			if !found {
+				c.Response.WriteHeader(http.StatusNotFound)
+				return
+			}
+
+			delete(articles, article_id)
+
+			c.Response.WriteHeader(http.StatusNoContent)
 		})
 
 	api.Serve()
