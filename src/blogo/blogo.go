@@ -5,6 +5,10 @@ import (
 
 	"net/http"
 
+	"strconv"
+
+	"fmt"
+
 	"github.com/fulldump/golax"
 )
 
@@ -28,7 +32,7 @@ func main() {
 
 	api := golax.NewApi()
 
-	api.Root.
+	node_articles := api.Root.
 		Node("articles").
 		Method("GET", func(c *golax.Context) {
 
@@ -44,6 +48,28 @@ func main() {
 			articles = append(articles, a)
 
 			c.Response.WriteHeader(http.StatusCreated)
+
+		})
+
+	node_articles.
+		Node("{article_id}").
+		Method("GET", func(c *golax.Context) {
+			article_id, err := strconv.Atoi(c.Parameters["article_id"])
+
+			if err != nil {
+				c.Response.WriteHeader(http.StatusBadRequest)
+				fmt.Println("Error parsing URL parameter `article_id`", err)
+				return
+			}
+
+			if article_id >= len(articles) || article_id < 0 {
+				c.Response.WriteHeader(http.StatusNotFound)
+				return
+			}
+
+			a := articles[article_id]
+
+			json.NewEncoder(c.Response).Encode(a)
 
 		})
 
