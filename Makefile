@@ -31,4 +31,4 @@ build_all:
 
 .PHONY: run
 run:
-	$(GOCMD) run src/$(PROJECT)/$(PROJECT).go
+	$(GOCMD) run src/$(PROJECT)/main.go
