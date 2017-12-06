@@ -6,6 +6,7 @@ import (
 
 	"fmt"
 
+	"github.com/fulldump/goconfig"
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
 	"gopkg.in/mgo.v2/bson"
@@ -17,7 +18,19 @@ type Article struct {
 	Content string `bson:"content" json:"content"`
 }
 
+type Config struct {
+	MongoUri string `usage:"MongoDB URI service"`
+	HttpAddr string `usage:"TCP port to listen"`
+}
+
 func main() {
+
+	// Get configuration
+	c := &Config{
+		MongoUri: "mongodb://localhost:27017/blogo",
+	}
+
+	goconfig.Read(c)
 
 	// Define Dao Articles
 	kip.Define(&kip.Collection{
@@ -29,7 +42,7 @@ func main() {
 		},
 	})
 
-	db, db_err := kip.NewDatabase("mongodb://localhost:27017/blogo")
+	db, db_err := kip.NewDatabase(c.MongoUri)
 	if nil != db_err {
 		panic(db_err)
 	}
