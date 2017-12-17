@@ -33,7 +33,27 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 			h2 {
 				color: #3030A0;
 			}
+
+			.button-remove {
+				background-color: red;
+				color:white;
+				border: solid #660000 1px;
+				border-radius: 3px;
+				display: inline-block;
+				cursor: pointer;
+			}
 		</style>
+
+		<script>
+			function removeArticle(id) {
+				var xhr = new XMLHttpRequest();
+				xhr.open('DELETE', '/articles/'+id, true);
+				xhr.onload = function() {
+					document.getElementById(id).style.display = 'none';
+				};
+				xhr.send(null);
+			}
+		</script>
 	</head>
 	<body>
 		<div class="content">
@@ -41,8 +61,10 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 			<h1>Hola mundo</h1>
 
 			{{range .}}
-				<h2>{{.title}}</h2>
+			<div id="{{.id}}">
+				<h2>{{.title}} <button class="button-remove" onclick="removeArticle('{{.id}}')">Borrar</button> </h2>
 				<p>{{.content}}</p>
+			</div>
 			{{end}}
 
 		<div>
@@ -57,6 +79,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 			a := item.Value.(*articles.Article)
 
 			l = append(l, map[string]string{
+				"id":      a.Id,
 				"title":   a.Title,
 				"content": a.Content,
 			})
