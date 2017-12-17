@@ -42,6 +42,34 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 				display: inline-block;
 				cursor: pointer;
 			}
+
+			.button-create {
+				background-color: blue;
+				color:white;
+				border: solid #000066 1px;
+				border-radius: 3px;
+				display: inline-block;
+				cursor: pointer;
+			}
+
+			.create-form {
+				border: solid gray 1px;
+				border-radius: 4px;
+				background-color: #F8F8F8;
+				padding: 16px;
+			}
+
+			#create-form-title {
+				display: block;
+				width: 100%;
+				font-weight: bold;
+				font-size: 150%;
+			}
+
+			#create-form-content {
+				display: block;
+				width: 100%;
+			}
 		</style>
 
 		<script>
@@ -53,12 +81,31 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 				};
 				xhr.send(null);
 			}
+
+			function createArticle() {
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/articles', true);
+				xhr.onload = function() {
+					window.location.href = '/';
+				};
+
+				var title = document.getElementById("create-form-title");
+				var content = document.getElementById("create-form-content");
+
+				var payload = {
+					"title": title.value,
+					"content": content.value,
+				};
+
+				xhr.send(JSON.stringify(payload));
+			}
 		</script>
 	</head>
 	<body>
 		<div class="content">
 
-			<h1>Hola mundo</h1>
+			<h1>BloGo</h1>
 
 			{{range .}}
 			<div id="{{.id}}">
@@ -66,6 +113,15 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 				<p>{{.content}}</p>
 			</div>
 			{{end}}
+
+			<div class="create-form">
+				<input type="text" id="create-form-title" placeholder="Título">
+				<textarea type="text" id="create-form-content" placeholder="Contenido..."></textarea>
+
+				<div style="text-align: center;">
+					<button id="create-form-button" class="button-create" onclick="createArticle()">Crear</button>
+				</div>
+			</div>
 
 		<div>
 	</body>
