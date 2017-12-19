@@ -15,6 +15,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 <html>
 	<head>
 		<title>BloGo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
 			html {
 				font-size: 120%;
