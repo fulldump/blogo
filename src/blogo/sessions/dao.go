@@ -65,15 +65,6 @@ func NewSession(dao *kip.Dao) (cookie string, item *kip.Item) {
 	return
 }
 
-func GetSession(dao *kip.Dao, cookie string) (item *kip.Item, err error) {
-
-	cookie_hash := hash(cookie)
-
-	item, err = dao.FindOne(bson.M{"cookie": cookie_hash})
-
-	return
-}
-
 func hash(i string) (o string) {
 
 	adder := md5.New()
