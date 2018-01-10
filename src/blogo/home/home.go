@@ -1,9 +1,11 @@
 package home
 
 import (
-	"blogo/articles"
-
 	"html/template"
+
+	"blogo/users"
+
+	"blogo/articles"
 
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
@@ -71,6 +73,11 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 				display: block;
 				width: 100%;
 			}
+
+			.auth {
+				text-align: right;
+			}
+
 		</style>
 
 		<script>
@@ -101,14 +108,67 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 
 				xhr.send(JSON.stringify(payload));
 			}
+
+			function login(e) {
+				e.preventDefault();
+
+				var email = document.getElementById("login-email");
+				var password = document.getElementById("login-password");
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/login/email', true);
+				xhr.onload = function() {
+					window.location.href = '/';
+				};
+
+				var payload = {
+					email: email.value,
+					password: password.value,
+				};
+
+				xhr.send(JSON.stringify(payload));
+			}
+
+			function logout(e) {
+				e.preventDefault();
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('DELETE', '/sessions/current', true);
+				xhr.onload = function() {
+					window.location.href = '/';
+				};
+
+				xhr.send();
+			}
+
 		</script>
 	</head>
 	<body>
 		<div class="content">
 
+			<div class="auth">
+				{{if .user}}
+				<form id="form-logout">
+					{{.user.Nick}} <button>Salir</button>
+				</form>
+				<script>
+					document.getElementById('form-logout').addEventListener('submit', logout, true);
+				</script>
+				{{else}}
+				<form id="form-login">
+					<input type="text" id="login-email" placeholder="tu@email.com">
+					<input type="password" id="login-password" placeholder="contraseña">
+					<button>Entrar</button>
+				</form>
+				<script>
+					document.getElementById('form-login').addEventListener('submit', login, true);
+				</script>
+				{{end}}
+			</div>
+
 			<h1>BloGo</h1>
 
-			{{range .}}
+			{{range .articles}}
 			<div id="{{.id}}">
 				<h2>{{.title}} <button class="button-remove" onclick="removeArticle('{{.id}}')">Borrar</button> </h2>
 				<p>{{.content}}</p>
@@ -130,19 +190,24 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 
 	parent.Method("GET", func(c *golax.Context) {
 
-		l := []interface{}{}
+		user := users.GetUser(c)
+
+		articles_list := []interface{}{}
 
 		articles_dao.Find(nil).ForEach(func(item *kip.Item) {
 			a := item.Value.(*articles.Article)
 
-			l = append(l, map[string]string{
+			articles_list = append(articles_list, map[string]string{
 				"id":      a.Id,
 				"title":   a.Title,
 				"content": a.Content,
 			})
 		})
 
-		t.Execute(c.Response, l)
+		t.Execute(c.Response, map[string]interface{}{
+			"user":     user,
+			"articles": articles_list,
+		})
 
 	})
 

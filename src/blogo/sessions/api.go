@@ -44,5 +44,28 @@ func Build(parent *golax.Node, sessions_dao *kip.Dao) {
 		json.NewEncoder(c.Response).Encode(session_item.Value)
 
 	})
+	current_node.Method("DELETE", func(c *golax.Context) {
+
+		session_item := GetSession(c)
+
+		if nil == session_item {
+			c.Error(http.StatusForbidden, "You must be logged in to do logout")
+			return
+		}
+
+		session_item.Patch(&kip.Patch{
+			Operation: "set",
+			Key:       "expire_timestamp",
+			Value:     0,
+		})
+
+		if err := session_item.Save(); nil != err {
+			c.Error(http.StatusInternalServerError, "Persistence write failed")
+			return
+		}
+
+		c.Response.WriteHeader(http.StatusNoContent)
+
+	})
 
 }

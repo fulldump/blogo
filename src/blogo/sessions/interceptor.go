@@ -5,6 +5,7 @@ import (
 
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const COOKIE_NAME = "blogo"
@@ -20,7 +21,8 @@ func NewSessionsInterceptor(dao *kip.Dao) *golax.Interceptor {
 				return
 			}
 
-			session_item, err := GetSession(dao, cookie.Value)
+			cookie_hash := hash(cookie.Value)
+			session_item, err := dao.FindOne(bson.M{"cookie": cookie_hash})
 			if nil != err {
 				// TODO: log error looking for session
 				CreateSession(dao, c)
@@ -79,4 +81,25 @@ func CreateSession(dao *kip.Dao, c *golax.Context) {
 	c.Response.Header().Set("Set-Cookie", COOKIE_NAME+"="+cookie)
 
 	c.Set("session", session_item)
+}
+
+func GetSession(c *golax.Context) *kip.Item {
+
+	value, ok := c.Get("session")
+	if !ok {
+		// todo: log, session does not exist
+		return nil
+	}
+
+	return value.(*kip.Item)
+}
+
+func SetSessionUserId(c *golax.Context, user_id string) error {
+	s := GetSession(c)
+	s.Patch(&kip.Patch{
+		Operation: "set",
+		Key:       "user_id",
+		Value:     user_id,
+	})
+	return s.Save()
 }
