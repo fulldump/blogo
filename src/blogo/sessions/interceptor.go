@@ -10,7 +10,7 @@ import (
 
 const COOKIE_NAME = "blogo"
 
-func NewSessionsInterceptor(dao *kip.Dao) *golax.Interceptor {
+func NewSessionInterceptor(dao *kip.Dao) *golax.Interceptor {
 	return &golax.Interceptor{
 		Before: func(c *golax.Context) {
 

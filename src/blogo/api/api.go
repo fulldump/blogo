@@ -17,7 +17,7 @@ func Build(articles_dao, sessions_dao, users_dao *kip.Dao) *golax.Api {
 
 	api := golax.NewApi()
 
-	api.Root.Interceptor(sessions.NewSessionsInterceptor(sessions_dao))
+	api.Root.Interceptor(sessions.NewSessionInterceptor(sessions_dao))
 	api.Root.Interceptor(users.NewUserInterceptor(users_dao))
 	api.Root.Interceptor(golax.InterceptorError)
 
