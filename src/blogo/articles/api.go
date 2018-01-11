@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"blogo/users"
+
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
 )
@@ -27,6 +29,18 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 	})
 
 	articles.Method("POST", func(c *golax.Context) {
+
+		user := users.GetUser(c)
+
+		if user == nil {
+			c.Error(http.StatusUnauthorized, "You should be logged in")
+			return
+		}
+
+		if user.Scopes.Banned {
+			c.Error(http.StatusForbidden, "You are banned! Banned users can not create articles.")
+			return
+		}
 
 		item := articles_dao.Create()
 
@@ -63,6 +77,18 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 	})
 
 	article.Method("DELETE", func(c *golax.Context) {
+
+		user := users.GetUser(c)
+
+		if user == nil {
+			c.Error(http.StatusUnauthorized, "You should be logged in")
+			return
+		}
+
+		if !user.Scopes.Admin {
+			c.Error(http.StatusForbidden, "Only admins can remove articles.")
+			return
+		}
 
 		article_id := c.Parameters["article_id"]
 
