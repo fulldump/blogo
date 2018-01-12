@@ -6,6 +6,8 @@
 
 BloGo is a blog system in Go.
 
+// TODO: complete this doc
+
 # Getting started
 
 ```sh
