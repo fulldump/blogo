@@ -1,6 +1,7 @@
 package home
 
-var html = `<!DOCTYPE html>
+var frame_template = `
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>BloGo</title>
@@ -153,24 +154,12 @@ var html = `<!DOCTYPE html>
 				{{end}}
 			</div>
 
-			<h1>BloGo</h1>
+			<a href="/"><h1>BloGo</h1></a>
 
-			{{range .articles}}
-			<div id="{{.id}}">
-				<h2>{{.title}} <button class="button-remove" onclick="removeArticle('{{.id}}')">Borrar</button> </h2>
-				<p>{{.content}}</p>
-			</div>
+			{{block "content" .}}
+				THIS IS THE CONTENT
 			{{end}}
-
-			<div class="create-form">
-				<input type="text" id="create-form-title" placeholder="Título">
-				<textarea type="text" id="create-form-content" placeholder="Contenido..."></textarea>
-
-				<div style="text-align: center;">
-					<button id="create-form-button" class="button-create" onclick="createArticle()">Crear</button>
-				</div>
-			</div>
-
 		<div>
 	</body>
-</html>`
+</html>
+`
