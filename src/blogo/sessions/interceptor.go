@@ -3,6 +3,7 @@ package sessions
 import (
 	"time"
 
+	"github.com/fulldump/goaudit"
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
 	"gopkg.in/mgo.v2/bson"
@@ -14,9 +15,12 @@ func NewSessionInterceptor(dao *kip.Dao) *golax.Interceptor {
 	return &golax.Interceptor{
 		Before: func(c *golax.Context) {
 
+			audit := goaudit.GetAudit(c)
+
 			cookie, err := c.Request.Cookie(COOKIE_NAME)
 
 			if nil != err {
+				audit.Log.Info("No cookie")
 				CreateSession(dao, c)
 				return
 			}
@@ -24,13 +28,13 @@ func NewSessionInterceptor(dao *kip.Dao) *golax.Interceptor {
 			cookie_hash := hash(cookie.Value)
 			session_item, err := dao.FindOne(bson.M{"cookie": cookie_hash})
 			if nil != err {
-				// TODO: log error looking for session
+				audit.Log.Error("Can not read from db", err)
 				CreateSession(dao, c)
 				return
 			}
 
 			if nil == session_item {
-				// TODO: log session not found
+				audit.Log.Info("Session not found")
 				CreateSession(dao, c)
 				return
 			}
@@ -39,19 +43,22 @@ func NewSessionInterceptor(dao *kip.Dao) *golax.Interceptor {
 
 			now := time.Now().Unix()
 			if now > session.ExpireTimestamp {
-				// Expired session
-				// TODO: log expired session
+				audit.Log.Info("Expired session")
 				CreateSession(dao, c)
 				return
 			}
+
+			audit.SessionId = session.Id
 
 			c.Set("session", session_item)
 		},
 		After: func(c *golax.Context) {
 
+			audit := goaudit.GetAudit(c)
+
 			value, ok := c.Get("session")
 			if !ok {
-				// todo: log, session does not exist
+				audit.Log.Fatal("Session does not exist!")
 				return
 			}
 
@@ -65,22 +72,35 @@ func NewSessionInterceptor(dao *kip.Dao) *golax.Interceptor {
 					"timestamp": time.Now().Unix(),
 				},
 			})
-			session_item.Save() // TODO: handle error
+			err := session_item.Save()
+			if nil != err {
+				audit.Log.Error(err)
+			}
 		},
 	}
 }
 
-func CreateSession(dao *kip.Dao, c *golax.Context) {
+func CreateSession(dao *kip.Dao, c *golax.Context) (session_item *kip.Item) {
+
 	cookie, session_item := NewSession(dao)
 
+	audit := goaudit.GetAudit(c)
+
 	if err := session_item.Save(); err != nil {
-		// TODO: log problem persisting session
+		audit.Log.Error(err)
 		return
 	}
+
+	session := session_item.Value.(*Session)
+
+	audit.SessionId = session.Id
+	audit.Log.Info("New session")
 
 	c.Response.Header().Set("Set-Cookie", COOKIE_NAME+"="+cookie)
 
 	c.Set("session", session_item)
+
+	return
 }
 
 func GetSession(c *golax.Context) *kip.Item {

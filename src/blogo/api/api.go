@@ -7,16 +7,27 @@ import (
 	"googleapi"
 
 	"blogo/articles"
+	"blogo/constants"
 	"blogo/home"
 	"blogo/login"
 	"blogo/sessions"
 	"blogo/users"
+
+	"blogo/audits"
+
+	"github.com/fulldump/goaudit"
 )
 
-func Build(articles_dao, sessions_dao, users_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string) *golax.Api {
+func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string, channel_audits chan *goaudit.Audit) *golax.Api {
 
 	api := golax.NewApi()
 
+	api.Root.Interceptor(goaudit.InterceptorAudit2Channel(channel_audits))
+	api.Root.Interceptor(goaudit.InterceptorAudit(&goaudit.Service{
+		Name:    constants.SERVICE,
+		Version: constants.VERSION,
+		Commit:  constants.COMMIT,
+	}))
 	api.Root.Interceptor(sessions.NewSessionInterceptor(sessions_dao))
 	api.Root.Interceptor(users.NewUserInterceptor(users_dao))
 	api.Root.Interceptor(golax.InterceptorError)
@@ -34,6 +45,9 @@ func Build(articles_dao, sessions_dao, users_dao *kip.Dao, g *googleapi.GoogleAp
 
 	// Connect login API
 	login.Build(api.Root, users_dao, g)
+
+	// Conenct audits API
+	audits.Build(api.Root, audits_dao)
 
 	return api
 }
