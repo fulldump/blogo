@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="ApiDoc">
+	<head>
+		<meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Api Doc</title>
+		<link href="static/favicon.ico" rel="icon" type="image/x-icon">
+
+		<link rel="stylesheet" type="text/css" href="static/apidoc/apidoc.css">
+
+		<script src="static/angular/angular.min.js"></script>
+		<script src="static/marked/marked.min.js"></script>
+		<script src="static/apidoc/apidoc.js"></script>
+	</head>
+	<body ng-controller="MainCtrl as main">
+
+		<div class="printable-header">
+			<div class="document-title">{{main.doc.title}}</div>
+			<div class="document-subtitle">{{main.doc.subtitle}}</div>
+		</div>
+
+		<div class="panel-index">
+			<div class="border">
+				<ul>
+					<li><a href="#Endpoints">Endpoints</a>
+						<ul>
+							<li ng-repeat="(title,endpoint) in main.doc.endpoints">
+
+								<a href="#{{title}}">{{title}}</a>
+								<div class="methods">
+									<a href="#{{method_name}}-{{title}}" method="{{method_name}}" ng-repeat="(method_name, method) in endpoint.methods">{{method_name}}</a>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#Interceptors">Interceptors</a>
+						<ul>
+							<li ng-repeat="(title,interceptor) in main.doc.interceptors">
+								<a href="#Interceptor-{{title}}">{{title}}</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="panel-transparent"></div>
+
+		<div class="panel-content">
+			<div class="border">
+
+				<div class="screen-header">
+					<div class="document-title">{{main.doc.title}}</div>
+					<div class="document-subtitle">{{main.doc.subtitle}}</div>
+				</div>
+
+				<h1 id="Endpoints">Endpoints</h1>
+				<div ng-repeat="(title,endpoint) in main.doc.endpoints">
+					<h2 class="endpoint-title" id="{{title}}">{{title}}</h2>
+					<div class="interceptor-list"> 
+						<span ng-repeat="interceptor in endpoint.interceptors"><a class="interceptor" href="#Interceptor-{{interceptor}}" title="Interceptor {{interceptor}}"> {{interceptor}} </a><span class="interceptor-separator"> > </span></span>
+					</div>
+					<marked class="description" content="endpoint.description"></marked>
+					<div class="method" method="{{method_name}}" ng-repeat="(method_name, method) in endpoint.methods">
+						<h3 class="title-method" method="{{method_name}}" id="{{method_name}}-{{title}}">
+							<span class="label-method" method="{{method_name}}">{{method_name}}</span>
+							<span ng-repeat="part in endpoint.url">/<span ng-hide="part.isparam">{{part.name}}</span><span ng-show="part.isparam" ng-model="endpoint.parameters[part.name].value" contenteditable=""></span></span>
+							<div class="right">
+								<span class="name-method">{{method.name}}</span>
+								<button ng-click="main.request(method_name, endpoint, method)">Send</button>
+							</div>
+						</h3>
+						<div class="detail-method" ng-show="method.response||method.description||method.bodyshow">
+							<div ng-show="method.bodyshow" class="method-body" valid-json="{{main.valid_json(method.body)}}">
+								<textarea ng-model="method.body"></textarea>
+							</div>
+							<div ng-show="method.response" class="response">{{method.response}}</div>
+							<marked class="description" content="method.description">{{method.description}}</marked>
+						</div>
+					</div>
+				</div>
+				<h1 id="Interceptors">Interceptors</h1>
+				<div ng-repeat="(title,interceptor) in main.doc.interceptors">
+					<h2 id="Interceptor-{{title}}">{{title}}</h2>
+					<marked class="description" content="interceptor"></marked>
+				</div>
+
+				<div style="height: 900px;"></div>
+
+			</div>
+		</div>
+
+	</body>
+</html>
