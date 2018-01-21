@@ -1,18 +1,18 @@
 package home
 
 import (
-	"html/template"
-
-	"blogo/users"
-
-	"blogo/articles"
-
 	"fmt"
+	"html/template"
 	"net/http"
+
+	"googleapi"
 
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
 	"gopkg.in/mgo.v2/bson"
+
+	"blogo/articles"
+	"blogo/users"
 )
 
 func p(name string, codes ...string) (t *template.Template, err error) {
@@ -27,7 +27,7 @@ func p(name string, codes ...string) (t *template.Template, err error) {
 	return
 }
 
-func Build(parent *golax.Node, articles_dao *kip.Dao) {
+func Build(parent *golax.Node, articles_dao *kip.Dao, google *googleapi.GoogleApi) {
 
 	t_home, _ := p("home", frame_template, home_template)
 	t_article, _ := p("article", frame_template, article_template)
@@ -44,10 +44,16 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 			articles_list = append(articles_list, a)
 		})
 
-		t_home.Execute(c.Response, map[string]interface{}{
-			"user":     user,
-			"articles": articles_list,
+		err := t_home.Execute(c.Response, map[string]interface{}{
+			"user":              user,
+			"articles":          articles_list,
+			"google_oauth_link": google.CreateLink(c.Request.URL.Path),
 		})
+
+		if nil != err {
+			fmt.Println("ERROR:", err)
+			return
+		}
 
 	})
 
@@ -69,8 +75,9 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 		article := article_item.Value.(*articles.Article)
 
 		err = t_article.Execute(c.Response, map[string]interface{}{
-			"user":    users.GetUser(c),
-			"article": article,
+			"user":              users.GetUser(c),
+			"article":           article,
+			"google_oauth_link": google.CreateLink(c.Request.URL.Path),
 		})
 
 	})

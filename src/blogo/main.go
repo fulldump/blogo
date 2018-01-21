@@ -24,7 +24,7 @@ func main() {
 	users_dao := kip.NewDao("users", db)
 
 	// Buid API
-	a := api.Build(articles_dao, sessions_dao, users_dao)
+	a := api.Build(articles_dao, sessions_dao, users_dao, &c.Google)
 
 	// Serve
 	a.Serve()
