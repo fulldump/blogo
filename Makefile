@@ -9,8 +9,18 @@ GOPATH=$(shell pwd)
 GO=go
 GOCMD=GOPATH=$(GOPATH) $(GO)
 
-GOBUILD = $(GOCMD) build $(FLAGS)
+COMMIT = $(shell git log -1 --format="%h" 2>/dev/null || echo "0")
+VERSION=$(shell git describe --tags --always)
+BUILD_DATE = $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
+COMPILER = $(shell $(GOCMD) version)
+FLAGS = -ldflags "\
+  -X $(PROJECT)/constants.COMMIT=$(COMMIT) \
+  -X $(PROJECT)/constants.VERSION=$(VERSION) \
+  -X $(PROJECT)/constants.BUILD_DATE=$(BUILD_DATE) \
+  -X '$(PROJECT)/constants.COMPILER=$(COMPILER)' \
+  "
 
+GOBUILD = $(GOCMD) build $(FLAGS)
 
 .PHONY: all
 all:	build_one

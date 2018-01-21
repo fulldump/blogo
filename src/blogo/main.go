@@ -5,6 +5,9 @@ import (
 
 	"blogo/api"
 
+	"fmt"
+	"net/http"
+
 	"github.com/fulldump/kip"
 )
 
@@ -27,5 +30,13 @@ func main() {
 	a := api.Build(articles_dao, sessions_dao, users_dao, &c.Google)
 
 	// Serve
-	a.Serve()
+	s := &http.Server{
+		Addr:    c.HttpAddr,
+		Handler: a,
+	}
+
+	if err := s.ListenAndServe(); nil != err {
+		fmt.Println("Server:", err)
+	}
+
 }

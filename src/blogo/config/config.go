@@ -9,6 +9,8 @@ import (
 	"github.com/fulldump/goconfig"
 
 	"blogo/users"
+	"os"
+	"blogo/constants"
 )
 
 type Config struct {
@@ -17,6 +19,8 @@ type Config struct {
 	Cookies  Cookies
 	Users    Users
 	Google   googleapi.GoogleApi
+
+	Version bool `usage:"Show version"`
 }
 
 type Cookies struct {
@@ -34,6 +38,12 @@ func Read() *Config {
 	}
 
 	goconfig.Read(c)
+
+	if c.Version {
+		fmt.Println("Version:", constants.VERSION, "\tCompiler:", constants.COMPILER)
+		os.Exit(0)
+	}
+
 
 	if c.Cookies.SecretSalt == "" {
 		// TODO: use a logger insted of stdout
