@@ -27,7 +27,7 @@ func p(name string, codes ...string) (t *template.Template, err error) {
 	return
 }
 
-func Build(parent *golax.Node, articles_dao *kip.Dao, google *googleapi.GoogleApi) {
+func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string) {
 
 	t_home, _ := p("home", frame_template, home_template)
 	t_article, _ := p("article", frame_template, article_template)
@@ -47,7 +47,8 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, google *googleapi.GoogleAp
 		err := t_home.Execute(c.Response, map[string]interface{}{
 			"user":              user,
 			"articles":          articles_list,
-			"google_oauth_link": google.CreateLink(c.Request.URL.Path),
+			"google_oauth_link": g.CreateLink(c.Request.URL.Path),
+			"google_analytics":  google_analytics,
 		})
 
 		if nil != err {
@@ -77,7 +78,8 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, google *googleapi.GoogleAp
 		err = t_article.Execute(c.Response, map[string]interface{}{
 			"user":              users.GetUser(c),
 			"article":           article,
-			"google_oauth_link": google.CreateLink(c.Request.URL.Path),
+			"google_oauth_link": g.CreateLink(c.Request.URL.Path),
+			"google_analytics":  google_analytics,
 		})
 
 	})

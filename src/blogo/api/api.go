@@ -13,7 +13,7 @@ import (
 	"blogo/users"
 )
 
-func Build(articles_dao, sessions_dao, users_dao *kip.Dao, g *googleapi.GoogleApi) *golax.Api {
+func Build(articles_dao, sessions_dao, users_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string) *golax.Api {
 
 	api := golax.NewApi()
 
@@ -21,7 +21,7 @@ func Build(articles_dao, sessions_dao, users_dao *kip.Dao, g *googleapi.GoogleAp
 	api.Root.Interceptor(users.NewUserInterceptor(users_dao))
 	api.Root.Interceptor(golax.InterceptorError)
 
-	home.Build(api.Root, articles_dao, g)
+	home.Build(api.Root, articles_dao, g, google_analytics)
 
 	// Connect articles API
 	articles.Build(api.Root, articles_dao)

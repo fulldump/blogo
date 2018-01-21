@@ -8,17 +8,18 @@ import (
 
 	"github.com/fulldump/goconfig"
 
+	"blogo/constants"
 	"blogo/users"
 	"os"
-	"blogo/constants"
 )
 
 type Config struct {
-	MongoUri string `usage:"MongoDB URI service"`
-	HttpAddr string `usage:"TCP port to listen"`
-	Cookies  Cookies
-	Users    Users
-	Google   googleapi.GoogleApi
+	MongoUri        string `usage:"MongoDB URI service"`
+	HttpAddr        string `usage:"TCP port to listen"`
+	Cookies         Cookies
+	Users           Users
+	Google          googleapi.GoogleApi
+	GoogleAnalytics string `usage:"Google Analytics ID"`
 
 	Version bool `usage:"Show version"`
 }
@@ -43,7 +44,6 @@ func Read() *Config {
 		fmt.Println("Version:", constants.VERSION, "\tCompiler:", constants.COMPILER)
 		os.Exit(0)
 	}
-
 
 	if c.Cookies.SecretSalt == "" {
 		// TODO: use a logger insted of stdout
