@@ -1,19 +1,19 @@
 package api
 
 import (
-	"blogo/articles"
-
-	"blogo/home"
-	"blogo/sessions"
-
-	"blogo/login"
-	"blogo/users"
-
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
+
+	"googleapi"
+
+	"blogo/articles"
+	"blogo/home"
+	"blogo/login"
+	"blogo/sessions"
+	"blogo/users"
 )
 
-func Build(articles_dao, sessions_dao, users_dao *kip.Dao) *golax.Api {
+func Build(articles_dao, sessions_dao, users_dao *kip.Dao, g *googleapi.GoogleApi) *golax.Api {
 
 	api := golax.NewApi()
 
@@ -21,7 +21,7 @@ func Build(articles_dao, sessions_dao, users_dao *kip.Dao) *golax.Api {
 	api.Root.Interceptor(users.NewUserInterceptor(users_dao))
 	api.Root.Interceptor(golax.InterceptorError)
 
-	home.Build(api.Root, articles_dao)
+	home.Build(api.Root, articles_dao, g)
 
 	// Connect articles API
 	articles.Build(api.Root, articles_dao)
@@ -33,7 +33,7 @@ func Build(articles_dao, sessions_dao, users_dao *kip.Dao) *golax.Api {
 	users.Build(api.Root, users_dao)
 
 	// Connect login API
-	login.Build(api.Root, users_dao)
+	login.Build(api.Root, users_dao, g)
 
 	return api
 }

@@ -3,16 +3,19 @@ package users
 import (
 	"crypto/md5"
 	"encoding/hex"
+
+	"googleapi"
 )
 
 var SECRET_SALT = "fb30b9bc-f3e9-11e7-ae16-0369d9f380f8"
 
 type User struct {
-	Id              string     `bson:"_id" json:"id"`
-	Nick            string     `bson:"nick" json:"nick"`
-	CreateTimestamp int64      `bson:"create_timestamp" json:"create_timestamp"`
-	LoginEmail      LoginEmail `bson:"login_email" json:"login_email"`
-	Scopes          Scopes     `bson:"scopes" json:"scopes"`
+	Id              string                    `bson:"_id" json:"id"`
+	Nick            string                    `bson:"nick" json:"nick"`
+	CreateTimestamp int64                     `bson:"create_timestamp" json:"create_timestamp"`
+	LoginEmail      LoginEmail                `bson:"login_email" json:"login_email"`
+	LoginGoogle     *googleapi.GoogleUserInfo `bson:"login_google", json:"login_google"`
+	Scopes          Scopes                    `bson:"scopes" json:"scopes"`
 }
 
 type LoginEmail struct {

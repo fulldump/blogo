@@ -4,9 +4,11 @@ import (
 	"blogo/sessions"
 	"fmt"
 
-	"blogo/users"
+	"googleapi"
 
 	"github.com/fulldump/goconfig"
+
+	"blogo/users"
 )
 
 type Config struct {
@@ -14,6 +16,7 @@ type Config struct {
 	HttpAddr string `usage:"TCP port to listen"`
 	Cookies  Cookies
 	Users    Users
+	Google   googleapi.GoogleApi
 }
 
 type Cookies struct {

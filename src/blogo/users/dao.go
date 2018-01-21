@@ -24,16 +24,16 @@ func init() {
 		},
 		Indexes: []mgo.Index{
 			mgo.Index{
-				Key:        []string{"nick"},
+				Key:        []string{"login_email.email"},
 				Unique:     true,
-				Sparse:     false,
+				Sparse:     true,
 				Background: false,
 				DropDups:   true,
 			},
 			mgo.Index{
-				Key:        []string{"login_email.email"},
+				Key:        []string{"login_google.id"},
 				Unique:     true,
-				Sparse:     false,
+				Sparse:     true,
 				Background: false,
 				DropDups:   true,
 			},

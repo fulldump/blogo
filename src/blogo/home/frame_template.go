@@ -137,6 +137,9 @@ var frame_template = `
 			<div class="auth">
 				{{if .user}}
 				<form id="form-logout">
+					{{if .user.LoginGoogle }}
+					<img src="{{.user.LoginGoogle.Picture}}" style="height: 24px; vertical-align: text-bottom;">
+					{{end}}
 					{{.user.Nick}} <button>Salir</button>
 				</form>
 				<script>
@@ -148,6 +151,7 @@ var frame_template = `
 					<input type="password" id="login-password" placeholder="contraseña">
 					<button>Entrar</button>
 				</form>
+				<a href="{{ .google_oauth_link }}">Entrar con Google</a>
 				<script>
 					document.getElementById('form-login').addEventListener('submit', login, true);
 				</script>
