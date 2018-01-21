@@ -20,6 +20,7 @@ type Config struct {
 	Users           Users
 	Google          googleapi.GoogleApi
 	GoogleAnalytics string `usage:"Google Analytics ID"`
+	Statics         string `usage:"If not empty, server will serve statics from that directory"`
 
 	Version bool `usage:"Show version"`
 }
