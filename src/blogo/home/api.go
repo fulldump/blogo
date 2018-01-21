@@ -12,6 +12,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 
 	"blogo/articles"
+	"blogo/statics"
 	"blogo/users"
 )
 
@@ -29,8 +30,12 @@ func p(name string, codes ...string) (t *template.Template, err error) {
 
 func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string) {
 
-	t_home, _ := p("home", frame_template, home_template)
-	t_article, _ := p("article", frame_template, article_template)
+	template_html := string(statics.Bytes["template.html"])
+	index_html := string(statics.Bytes["index.html"])
+	article_html := string(statics.Bytes["article.html"])
+
+	t_home, _ := p("home", template_html, index_html)
+	t_article, _ := p("article", template_html, article_html)
 
 	parent.Method("GET", func(c *golax.Context) {
 

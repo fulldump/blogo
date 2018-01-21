@@ -39,6 +39,10 @@ build_all:
 	GOARCH=amd64 GOOS=windows $(GOBUILD) -o bin/$(PROJECT).win64.exe $(PROJECT)
 	GOARCH=386   GOOS=windows $(GOBUILD) -o bin/$(PROJECT).win32.exe $(PROJECT)
 
+.PHONY: statics
+statics:
+	$(GOCMD) run src/genstatic/genstatic.go --dir=src/www/ --package=statics > src/$(PROJECT)/statics/data.go
+
 .PHONY: run
 run:
 	$(GOCMD) run src/$(PROJECT)/main.go
