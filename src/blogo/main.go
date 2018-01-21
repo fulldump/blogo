@@ -27,7 +27,7 @@ func main() {
 	users_dao := kip.NewDao("users", db)
 
 	// Buid API
-	a := api.Build(articles_dao, sessions_dao, users_dao, &c.Google)
+	a := api.Build(articles_dao, sessions_dao, users_dao, &c.Google, c.GoogleAnalytics)
 
 	// Serve
 	s := &http.Server{
@@ -35,6 +35,7 @@ func main() {
 		Handler: a,
 	}
 
+	fmt.Println("Listening", s.Addr)
 	if err := s.ListenAndServe(); nil != err {
 		fmt.Println("Server:", err)
 	}

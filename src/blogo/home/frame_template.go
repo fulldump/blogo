@@ -130,6 +130,15 @@ var frame_template = `
 			}
 
 		</script>
+		{{if .google_analytics }}
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{.google_analytics}}"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', '{{.google_analytics}}');
+		</script>
+		{{end}}
 	</head>
 	<body>
 		<div class="content">
