@@ -10,6 +10,7 @@ func Build(node *golax.Node, statics string) {
 
 	m := readFileInternal
 	if "" != statics {
+		fmt.Println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
 		m = readFileExternal(statics)
 	}
 

@@ -17,11 +17,12 @@ import (
 
 	"blogo/statics"
 
+	"blogo/config"
+	"encoding/json"
+	"net/http"
+
 	"github.com/fulldump/apidoc"
 	"github.com/fulldump/goaudit"
-	"net/http"
-	"encoding/json"
-	"blogo/config"
 )
 
 func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics, statics_dir string, channel_audits chan *goaudit.Audit, config *config.Config) *golax.Api {
@@ -63,7 +64,7 @@ func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *google
 	// Configuration
 	api.Root.Node("config").Method("GET", func(c *golax.Context) {
 		user := users.GetUser(c)
-		if !user.Scopes.Admin {
+		if nil == user || !user.Scopes.Admin {
 			c.Error(http.StatusForbidden, "You are not allowed")
 			return
 		}
