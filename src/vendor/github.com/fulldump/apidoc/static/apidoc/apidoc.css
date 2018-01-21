@@ -1,0 +1,372 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.printable-header {
+  display: none;
+}
+
+.document-title {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+}
+
+.document-subtitle {
+  text-align: center;
+  font-size: 120%;
+  color: gray;
+}
+
+.panel-index {
+  border: solid silver 1px;
+  background-color: rgba(230,230,230, 0.8);
+}
+
+.panel-index .border {
+  padding: 16px;
+}
+
+.panel-index .methods {
+  padding-left: 16px;
+}
+
+.panel-index ol,
+.panel-index ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.panel-index li {
+  display: block;
+}
+
+.panel-index li li {
+  margin-left: 16px;
+}
+
+.panel-index li > a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel-content .border {
+  padding: 16px;
+}
+
+.panel-index [method] {
+  display: inline-block;
+  font-size: 80%;
+  font-weight: bold;
+  padding: 1px 3px;
+  color: white !important;
+  margin-right: 2px;
+  border: solid silver 1px;
+  border-radius: 3px;
+}
+
+.endpoint-title {
+  margin-bottom: 0;
+}
+
+.interceptor-list {
+  font-size: 80%;
+  margin-bottom: 20px;
+}
+
+.interceptor-separator {
+  color: silver;
+}
+
+.interceptor-list > span:last-child .interceptor-separator {
+  display: none;
+}
+
+.title-method {
+  overflow: hidden;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 8px 0 0 0;
+}
+
+.title-method button {
+  border: solid gray 1px;
+  background-color: transparent;
+  border-radius: 2px;
+  color: gray;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.title-method .right {
+  float: right;
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.name-method {
+  font-weight: normal;
+}
+
+.title-method button:hover {
+  color: black;
+  border-color: black;
+}
+
+.title-method [contenteditable] {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.title-method [method] {
+  display: inline-block;
+  height: 100%;
+  color: white;
+  padding: 4px 6px;
+  min-width: 90px;
+  text-align: center;
+  margin: 0;
+}
+
+.method[method]           .label-method {background-color: gray;}
+.method[method="OPTIONS"] .label-method {background-color: #0f6ab4;}
+.method[method="HEAD"]    .label-method {background-color: #ffd20f;}
+.method[method="GET"]     .label-method {background-color: #0f6ab4;}
+.method[method="POST"]    .label-method {background-color: #10a54a;}
+.method[method="PATCH"]   .label-method {background-color: #D38042;}
+.method[method="PUT"]     .label-method {background-color: #c5862b;}
+.method[method="DELETE"]  .label-method {background-color: #a41e22;}
+
+.panel-index [method]           {background-color: gray;}
+.panel-index [method="OPTIONS"] {background-color: #0f6ab4;}
+.panel-index [method="HEAD"]    {background-color: #ffd20f;}
+.panel-index [method="GET"]     {background-color: #0f6ab4;}
+.panel-index [method="POST"]    {background-color: #10a54a;}
+.panel-index [method="PATCH"]   {background-color: #D38042;}
+.panel-index [method="PUT"]     {background-color: #c5862b;}
+.panel-index [method="DELETE"]  {background-color: #a41e22;}
+
+.method                   .title-method {background-color: silver;}
+.method[method="OPTIONS"] .title-method {background-color: #e7f0f7;}
+.method[method="HEAD"]    .title-method {background-color: #fcffcd;}
+.method[method="GET"]     .title-method {background-color: #e7f0f7;}
+.method[method="POST"]    .title-method {background-color: #e7f6ec;}
+.method[method="PATCH"]   .title-method {background-color: #FCE9E3;}
+.method[method="PUT"]     .title-method {background-color: #f9f2e9;}
+.method[method="DELETE"]  .title-method {background-color: #f5e8e8;}
+
+.method[method]           .name-method {color: gray;}
+.method[method="OPTIONS"] .name-method {color: #0f6ab4;}
+.method[method="HEAD"]    .name-method {color: #ffd20f;}
+.method[method="GET"]     .name-method {color: #0f6ab4;}
+.method[method="POST"]    .name-method {color: #10a54a;}
+.method[method="PATCH"]   .name-method {color: #D38042;}
+.method[method="PUT"]     .name-method {color: #c5862b;}
+.method[method="DELETE"]  .name-method {color: #a41e22;}
+
+.detail-method {
+  border-top: none;
+  padding: 16px 0;
+}
+
+.detail-method marked > p:first-child {
+    margin-top: 0;
+}
+
+.detail-method .method-body {
+  padding: 4px;
+  border: solid silver 1px;
+  margin-bottom: 16px;
+}
+
+.detail-method .method-body[valid-json="false"] {
+  border-color: red;
+}
+
+.detail-method .method-body textarea {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.detail-method .method-body textarea:focus {
+  outline: none;
+}
+
+.detail-method .response {
+  display: block;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fcf6db;
+  border: 1px solid #e5e0c6;
+  white-space: pre;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, 'Ubuntu Mono', monospace;
+  overflow-x: auto;
+}
+
+marked pre code {
+  display: block;
+  padding: 16px;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  white-space: pre;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, 'Ubuntu Mono', monospace;
+  overflow-x: auto;
+}
+
+
+/* Common styles for links */
+.panel-index li a,
+.panel-content a {
+  color: #337ab7;
+  text-decoration: none;
+}
+.panel-index li a:hover,
+.panel-content a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+/* wide screens */
+@media screen and (min-width: 700px) {
+
+  .panel-index {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    min-width: 300px;
+    max-width: 300px;
+    z-index: 2;
+
+    border-top: none;
+    border-bottom: none;
+    transition: background-color 0.2s ease-out, max-width 0.2s ease-in;    
+  }
+
+  .panel-index:hover {
+    min-width: 300px;
+    width: auto;
+    max-width: 90%;
+    overflow-y: auto;
+
+    background-color: rgba(255,255,255,0.8);
+  }
+
+  .panel-transparent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.2s ease-out;
+  }
+
+  .panel-index:hover + .panel-transparent {
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+  }
+
+  .panel-content {
+    margin-left: 300px;
+  }
+
+  .panel-content .border {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .panel-index::-webkit-scrollbar {
+      width: 12px;
+  }
+   
+  .panel-index::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      border-radius: 10px;
+  }
+   
+  .panel-index::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: gray;
+  }
+
+}
+
+@media print {
+
+/*  body {
+    -webkit-print-color-adjust: exact;
+  }
+*/
+  .panel-index {
+    border: none;
+  }
+
+  .screen-header {
+    display: none;
+  }
+
+  .printable-header {
+    display: block;
+  }
+
+  .document-title {
+    padding: 128px 0 16px;
+    font-size: 64px;
+  }
+
+  .document-subtitle {
+    color: gray !important;
+  }
+
+  .title-method .label-method {
+    text-align: left;
+    padding-right: 8px;
+    min-width: 0;
+  }
+
+  .title-method button {
+    display: none;
+  }
+
+  .method-body {
+    border-color: dodgerblue !important;
+  }
+
+  .detail-method .response {
+    border-color: #ffd20f !important;
+  }
+
+  .method[method]           .label-method {color: gray;}
+  .method[method="OPTIONS"] .label-method {color: #0f6ab4;}
+  .method[method="HEAD"]    .label-method {color: #ffd20f;}
+  .method[method="GET"]     .label-method {color: #0f6ab4;}
+  .method[method="POST"]    .label-method {color: #10a54a;}
+  .method[method="PATCH"]   .label-method {color: #D38042;}
+  .method[method="PUT"]     .label-method {color: #c5862b;}
+  .method[method="DELETE"]  .label-method {color: #a41e22;}
+
+  .title-method[method]           {border: solid silver 1px;}
+  .title-method[method="OPTIONS"] {border-color: #0f6ab4;}
+  .title-method[method="HEAD"]    {border-color: #ffd20f;}
+  .title-method[method="GET"]     {border-color: #0f6ab4;}
+  .title-method[method="POST"]    {border-color: #10a54a;}
+  .title-method[method="PATCH"]   {border-color: #D38042;}
+  .title-method[method="PUT"]     {border-color: #c5862b;}
+  .title-method[method="DELETE"]  {border-color: #a41e22;}
+
+
+  marked code {
+    border: solid gray 1px;
+  }
+
+}
