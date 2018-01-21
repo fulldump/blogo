@@ -33,7 +33,7 @@ func main() {
 	goaudit.Chan2Mongo(channel_audits, db.C("").Database) // do the job: channel -> mongo
 
 	// Buid API
-	a := api.Build(articles_dao, sessions_dao, users_dao, audits_dao, &c.Google, c.Statics, c.GoogleAnalytics, channel_audits)
+	a := api.Build(articles_dao, sessions_dao, users_dao, audits_dao, &c.Google, c.Statics, c.GoogleAnalytics, channel_audits, c)
 
 	// Serve
 	s := &http.Server{

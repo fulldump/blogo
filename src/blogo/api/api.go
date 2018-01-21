@@ -19,9 +19,12 @@ import (
 
 	"github.com/fulldump/apidoc"
 	"github.com/fulldump/goaudit"
+	"net/http"
+	"encoding/json"
+	"blogo/config"
 )
 
-func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics, statics_dir string, channel_audits chan *goaudit.Audit) *golax.Api {
+func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics, statics_dir string, channel_audits chan *goaudit.Audit, config *config.Config) *golax.Api {
 
 	api := golax.NewApi()
 
@@ -56,6 +59,17 @@ func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *google
 	doc := apidoc.Build(api, api.Root)
 	doc.Title = "BloGo"
 	doc.Subtitle = "API Reference v" + constants.VERSION
+
+	// Configuration
+	api.Root.Node("config").Method("GET", func(c *golax.Context) {
+		user := users.GetUser(c)
+		if !user.Scopes.Admin {
+			c.Error(http.StatusForbidden, "You are not allowed")
+			return
+		}
+
+		json.NewEncoder(c.Response).Encode(config)
+	})
 
 	// Static files
 	statics.Build(api.Root, statics_dir)
