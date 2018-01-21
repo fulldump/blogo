@@ -36,6 +36,7 @@ func Read() *Config {
 
 	c := &Config{
 		MongoUri: "mongodb://localhost:27017/blogo",
+		HttpAddr: ":8000",
 	}
 
 	goconfig.Read(c)
