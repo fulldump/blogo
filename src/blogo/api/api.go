@@ -15,6 +15,7 @@ import (
 
 	"blogo/audits"
 
+	"github.com/fulldump/apidoc"
 	"github.com/fulldump/goaudit"
 )
 
@@ -48,6 +49,11 @@ func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *google
 
 	// Conenct audits API
 	audits.Build(api.Root, audits_dao)
+
+	// Documentation
+	doc := apidoc.Build(api, api.Root)
+	doc.Title = "BloGo"
+	doc.Subtitle = "API Reference v" + constants.VERSION
 
 	return api
 }
