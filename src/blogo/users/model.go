@@ -19,8 +19,8 @@ type User struct {
 }
 
 type LoginEmail struct {
-	Email        string `bson:"email" json:"email"`
-	PasswordHash string `bson:"password_hash" json:"password_hash"`
+	Email        string `bson:"email,omitempty" json:"email"`
+	PasswordHash string `bson:"password_hash,omitempty" json:"password_hash"`
 }
 
 func (e LoginEmail) Check(password string) bool {
