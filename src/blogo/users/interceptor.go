@@ -24,6 +24,10 @@ func NewUserInterceptor(dao *kip.Dao) *golax.Interceptor {
 
 			user_id := s.Value.(*sessions.Session).UserId
 
+			if "" == user_id {
+				return
+			}
+
 			user_item, err := dao.FindOne(bson.M{"_id": user_id})
 			if nil != err {
 				audit.Log.Error("Can not read user from db", err)

@@ -1,5 +1,5 @@
 {{define "content"}}
 			<h2>{{.article.Title}}</h2>
-			<p>{{.article.Content}}</p>
+            <p> <time datetime="{{.article.CreateDate }}">{{.article.CreateDate }}</time> </p>
+            <p>{{.article.Content}}</p>
 {{end}}
-

@@ -7,6 +7,8 @@ import (
 
 	"blogo/users"
 
+	"time"
+
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
 )
@@ -45,6 +47,10 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 		item := articles_dao.Create()
 
 		json.NewDecoder(c.Request.Body).Decode(&item.Value)
+
+		article := item.Value.(*Article)
+		article.CreateTimestamp = time.Now().UnixNano()
+		article.OwnerId = user.Id
 
 		if err := item.Save(); nil != err {
 			fmt.Println(err)

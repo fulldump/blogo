@@ -14,6 +14,7 @@ import (
 	"blogo/articles"
 	"blogo/statics"
 	"blogo/users"
+	"time"
 )
 
 func p(name string, codes ...string) (t *template.Template, err error) {
@@ -46,7 +47,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 		articles_dao.Find(nil).ForEach(func(item *kip.Item) {
 			a := item.Value.(*articles.Article)
 
-			articles_list = append(articles_list, a)
+			articles_list = append(articles_list, formatArticleData(a))
 		})
 
 		err := t_home.Execute(c.Response, map[string]interface{}{
@@ -82,11 +83,22 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 
 		err = t_article.Execute(c.Response, map[string]interface{}{
 			"user":              users.GetUser(c),
-			"article":           article,
+			"article":           formatArticleData(article),
 			"google_oauth_link": g.CreateLink(c.Request.URL.Path),
 			"google_analytics":  google_analytics,
 		})
 
 	})
 
+}
+
+func formatArticleData(a *articles.Article) interface{} {
+	return map[string]interface{}{
+		"Id":              a.Id,
+		"OwnerId":         a.OwnerId,
+		"Title":           a.Title,
+		"Content":         a.Content,
+		"CreateTimestamp": a.CreateTimestamp,
+		"CreateDate":      time.Unix(0, a.CreateTimestamp).Format(time.RFC3339),
+	}
 }

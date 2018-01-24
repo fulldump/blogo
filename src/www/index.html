@@ -3,6 +3,7 @@
 			{{range .articles}}
 			<div id="{{.Id}}">
 				<h2><a href="/a/{{.Id}}">{{.Title}}</a> <button class="button-remove" onclick="removeArticle('{{.Id}}')">Borrar</button> </h2>
+                <p> <time datetime="{{.CreateDate }}">{{.CreateDate }}</time> </p>
 				<p>{{.Content}}</p>
 			</div>
 			{{end}}
