@@ -31,7 +31,7 @@ func NewUserInterceptor(dao *kip.Dao) *golax.Interceptor {
 			}
 
 			if nil == user_item {
-				audit.Log.Info("User not found")
+				audit.Log.Infof("User '%s' not found", user_id)
 				return
 			}
 
