@@ -14,7 +14,7 @@ import (
 	"blogo/users"
 )
 
-func Build(parent *golax.Node, dao_users *kip.Dao, g *googleapi.GoogleApi) {
+func Build(parent *golax.Node, dao_users, dao_sessions *kip.Dao, g *googleapi.GoogleApi) {
 
 	google_node := parent.Node("google")
 
@@ -58,6 +58,8 @@ func Build(parent *golax.Node, dao_users *kip.Dao, g *googleapi.GoogleApi) {
 				return
 			}
 		}
+
+		sessions.CreateSession(dao_sessions, c)
 
 		user := user_item.Value.(*users.User)
 		if err := sessions.SetSessionUserId(c, user.Id); nil != err {

@@ -96,7 +96,7 @@ func CreateSession(dao *kip.Dao, c *golax.Context) (session_item *kip.Item) {
 	audit.SessionId = session.Id
 	audit.Log.Info("New session")
 
-	c.Response.Header().Set("Set-Cookie", COOKIE_NAME+"="+cookie)
+	c.Response.Header().Set("Set-Cookie", COOKIE_NAME+"="+cookie+"; Path=/")
 
 	c.Set("session", session_item)
 

@@ -12,7 +12,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-func Build(parent *golax.Node, dao_users *kip.Dao) {
+func Build(parent *golax.Node, dao_users, dao_sessions *kip.Dao) {
 
 	email_node := parent.Node("email")
 	email_node.Method("POST", func(c *golax.Context) {
@@ -56,6 +56,8 @@ func Build(parent *golax.Node, dao_users *kip.Dao) {
 			c.Error(http.StatusForbidden, "Bad credentials")
 			return
 		}
+
+		sessions.CreateSession(dao_sessions, c)
 
 		if err := sessions.SetSessionUserId(c, user.Id); nil != err {
 			fmt.Println("ERROR:", err)

@@ -51,7 +51,7 @@ func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *google
 	users.Build(api.Root, users_dao)
 
 	// Connect login API
-	login.Build(api.Root, users_dao, g)
+	login.Build(api.Root, users_dao, sessions_dao, g)
 
 	// Conenct audits API
 	audits.Build(api.Root, audits_dao)
