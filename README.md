@@ -14,6 +14,11 @@ You should have a go compiler and MongoDB in your system, then:
 make run
 ```
 
+# Developers and contributors
+
+The process is being documented in https://www.youtube.com/watch?v=tPMVwd1js0I&list=PLMPsqnO6mKSDaL1nX3gzUP43HXJtIl4xJ.
+
+
 # Editing frontend
 
 Frontend files are embedded in the binary, so `make statics` will do the trick.
