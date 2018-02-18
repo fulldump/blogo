@@ -3,6 +3,8 @@ package statics
 import (
 	"fmt"
 
+	"strings"
+
 	"github.com/fulldump/golax"
 )
 
@@ -24,7 +26,15 @@ func Build(node *golax.Node, statics string) {
 	})
 
 	node.Node("{{*}}").Method("GET", func(c *golax.Context) {
-		m(c, c.Parameter)
+
+		filename := c.Request.URL.Path
+
+		fmt.Println(filename)
+
+		if strings.HasSuffix(filename, "/") {
+			filename += "index.html"
+		}
+		m(c, filename)
 	})
 
 }

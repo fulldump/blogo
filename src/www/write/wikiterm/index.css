@@ -1,0 +1,213 @@
+[data-component="WikiTerm"] {}
+
+[data-component="WikiTerm"][data-am_i_editing="true"] .content {
+  display: none;
+}
+
+[data-component="WikiTerm"] .first-row {
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+[data-component="WikiTerm"] .first-row .title {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+[data-component="WikiTerm"] .first-row .title label {
+  font-weight: normal;
+  font-size: 1rem;
+  color: gray;
+}
+
+[data-component="WikiTerm"] [component="Image"],
+[data-component="WikiTerm"] [component="Image"] img,
+[data-component="WikiTerm"] [component="Image"] figcaption {
+  display: block;
+  width: 30rem;
+  max-width: 100%;
+}
+
+[data-component="WikiTerm"] figure,
+[data-component="WikiTerm"] figure img,
+[data-component="WikiTerm"] figure figcaption {
+  display: block;
+  width: 20rem;
+  max-width: 100%;
+}
+
+[data-component="WikiTerm"] figure {
+  margin: 2rem auto;
+}
+
+[data-component="WikiTerm"] figure figcaption {
+  margin-top: 0.4rem;
+  border-top: solid silver 1px;
+  font-size: 0.8rem;
+  color: gray;
+  min-height: 1rem;
+}
+
+[data-component="WikiTerm"] code {
+  border: solid #E0E0E0 1px;
+  background-color: #FAFAFA;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, 'Ubuntu Mono', monospace;
+  border-radius: 2px;
+}
+
+[data-component="WikiTerm"] .content a.external {
+  padding-right: 11px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAcElEQVQY04WQwQ3FMAhDH1U3yk50JjITzOR/iKIq+ZFqiZv9DBi7XOJLLVIeqV3nsEttM+PSjeef21s79HkuyQmLfMmj2vNowsd4pHDpmuBwqCp6wdMBCrpZAXSzpXqSRsO6+7UeAYrz624Ae+rzxz+tmpApQSJRXwAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiTerm"] .content a.internal {
+}
+
+[data-component="WikiTerm"] .content a.file {
+  padding-left: 16px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA5ElEQVQ4y8WSMQ5BQRRFzxeJiootWIDcVkci0ShpiNJO7EAhkaChUdmB9m3BBkgUVD8R0cxPPub7o/KSKebNvffdmzcRGWVmNaDsrjdJZx+ukEFeACfg6M7J9cIEgHFg71PAzEpfYpVCHQTX/wWiVL4eUAWKwCwDPwHuwEXSDgdOqgLMcwYmwoMPB87FEFjmiAwkbbwCASIvZIDIzLrAQdI1R+SFbGYVoFkA9kA9jZS0AoapVv99suPskzU+3r1KWgMdoCVp64nzSLYQA20z82U+O7sNz1sbiIvAyOWd/viHYmD0BI/USM3XX+NYAAAAAElFTkSuQmCC');
+}
+
+[data-component="WikiTerm"] .content a.file[mime="image/jpeg"],
+[data-component="WikiTerm"] .content a.file[mime="image/jpg"],
+[data-component="WikiTerm"] .content a.file[mime="image/png"] {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH2wQGAgYUK8IYxQAAAfdJREFUOI3Fkk9rE1EUxX9vMlMmkzQpxFitQsRaqRRx4caFXYhdCIIg4gdwp1/AfhG3btwLWYhdFqorsaBgY8UmxTRJQ1vjpBkymZn3x0VqYzbtTu/m3Pt493DeOwf+d4lKpfLaTbtLAEIIjDFjF/7MAmEM5vhMKtmdvzpfstNeeubTl2puY/snQgi0NiitkVIhlRqiVCRSodQQz+Ydnjy+mwDYAGEU09N5rl8ZcHMhw+pHn8pWhkRqkqPlUa/JxsGxQhsgZVkU8i73FqcpTN4g662x35FIaVBKk0hN3PdRlofUgowdjRNYFkxl02w32kxcsqm1epzJF1FKo7QhiQa09ur0ux0uLCzhxl0QfysQUMh71JsejZZC6RLFKTDaoLRh/f0qKcvGb3/n1p2HRL47riCOYiwrRABq+M1oY0gSxV67weGvfbxMjuK5EraOCGWCJawRge8fsv6heWTP0IE4kRhj0DKk3xPE7QOESNFeWWPuojf+hI7vs/GtelJcSCJNPmsxO+NwfnqSeuOHN7JxENLr7JySObh2eZZH9xep1+tUt6qvAEStVnvnOM5tGCbxJGw0d9j8uqlau7svl58vPwO03TpoPZWxfBAEgRsEQTrsh24cxxNSSltrbQkhjG3b0nGcREmZe/tm5UW5XP4M6FMl/5P6Dd/JGGOKREqyAAAAAElFTkSuQmCC');
+}
+
+[data-component="WikiTerm"] .content > blockquote {
+  display: block;
+  padding: 1rem 4rem;
+  margin: 2rem 0rem;
+  color: gray;
+  font-style: oblique;
+  background-repeat: no-repeat;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAiCAYAAAAkjjtxAAACw0lEQVRYw9WYTWgTQRTH/29SQgsieLBNj+olol5EkIpCvfh1kBYv9iiSzCYIEkHxGASxtBWMh2Q34iXgwYPeRCp4VIogol6sF/XiRopK/Ugsmhkv2bDkq5OdV8G5LMy8fb//eztfb4H/rFGvgXK5PKaUOg1gGsA2IhoDsKq1fgXgTrVareTzeWUDj8LoEJzP5ymRSGSJaBbApl4wrfUzIcTJdDr9aVChNgxqdzQ+Pn4bwBkTsNb6DRHtl1J+G0SsDUOEBxOJxLypIwAgoiSAG4Nk15bRynCpVJoQQjzpN697JQHATinl8nqGHAwRimQhgqMg6LOG2bJmCABwXXcPER2Iutq11pPr2XAxRDPyU5bb4w6D7LIwRFP9hKWzzQYZYmEEczhpdfoQ/TAwY2EEgrfYONNavzUwY2EEgkcso39sYMbCCAT/tIj8D4BbBqYsjGCX+GgR+VUp5TsDOxZGsEssR4zc833/iqEtC2Oo+XwKYMrg5QaAFQBLAFzHcRYHYLMwhpopfwhgroePjO/7Zdu7LxeDQkfnayLa3W4ghBhJpVK/OKoFDkb4enmzm0Gj0RhlrHCsGS3B9Xq9AuBDF5uDXGo5GC3BuVxuTWt9qcvcm+ESzMHouJt6nne/WRSGV+4+x3Gecwm3YYgufSkA79sL3EKhEGecy5EZHYKllJ+VUlNa69XQJ9s7PDw8x6XWhiG6boqZzEsAx7TW30Pd5z3Pu8AlOipD9BpwHGeJiI4D+BrqXuAUHYWxbkHoum4SwAMi2h7qnvd9/7Lt6ReFYVTBFovFrbFY7B6AQ6FV/UgIMZNOp79wiDZlCBNn2Wx2JR6PHwZwrfmPAER0RCn1wvO8SQ7BpgyK8PmOElEFwGjoJ8d1KeVFrrndjyEiLJRFpdQuAHdDQf9m3KP7MsgyE9NEdK5Wq53I5XJr2ID2Lxgb2v4Cp8uQ4F531d4AAAAASUVORK5CYII=');
+}
+
+[data-component="WikiTerm"] .content > code {
+  font-size: 12px;
+  display: block;
+  margin: 2rem 1rem;
+  overflow-x: auto;
+  white-space: pre;
+  min-height: 1.5rem;
+}
+
+[data-component="WikiTerm"] .content > code .lang {
+  display: block;
+  float: right;
+  text-transform: uppercase;
+  color: silver;
+  color: #B2B2B2;
+  font-weight: bold;
+  border-color: silver;
+  border-width: 1px;
+  /*border-bottom-style: solid;*/
+  /*border-left-style: solid;*/
+  padding: 0.2rem 1rem;
+}
+
+[data-component="WikiTerm"] .content > code .gutter {
+  display: block;
+  float: left;
+  min-width: 2rem;
+  border-right: solid #EEEEEE 1px;
+  text-align: right;
+  color: #B2B2B2;
+  background: white;
+  margin-right: 0.5rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+[data-component="WikiTerm"] .hljs {
+  padding: 0;
+}
+
+[data-component="WikiTerm"] .content > p:first-letter {
+  font-size: 130%;
+  text-transform: uppercase;
+}
+/************************************ headers ************************************/
+
+[data-component="WikiTerm"] .content > h2:before,
+[data-component="WikiTerm"] .content > h3:before,
+[data-component="WikiTerm"] .content > h4:before,
+[data-component="WikiTerm"] .content > h5:before,
+[data-component="WikiTerm"] .content > h6:before {
+  display: block;
+  content: " ";
+  margin-top: -70px;
+  height: 90px;
+  visibility: hidden;
+}
+
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  display: block;
+  color: black;
+  text-decoration: none;
+}
+
+h2 .identation,
+h3 .identation,
+h4 .identation,
+h5 .identation,
+h6 .identation {
+  color: #F4F4F4;
+  text-align: right;
+  margin-left: -110px;
+  padding-right: 10px;
+  display: inline-block;
+  width: 100px;
+}
+
+h2:hover .identation,
+h3:hover .identation,
+h4:hover .identation,
+h5:hover .identation,
+h6:hover .identation {
+  color: silver;
+}
+
+h2:target .identation,
+h3:target .identation,
+h4:target .identation,
+h5:target .identation,
+h6:target .identation {
+  color: dodgerblue;
+}
+/************************************ index ************************************/
+
+.index {}
+
+.index a {
+  color: dodgerblue;
+  text-decoration: none;
+}
+
+.index a:hover {
+  text-decoration: underline;
+}
+
+.index .identation {
+  padding-right: 0.5em;
+}
+
+.index ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.index ol ol {
+  padding-left: 32px;
+}

@@ -1,0 +1,122 @@
+[component="Terrain"] {
+  /*  padding: 16px;*/
+  /*  margin: 8px;*/
+  min-height: 600px;
+  outline: solid silver 0px;
+  /*box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);*/
+}
+
+[component="Terrain"] > p {
+  color: #333333;
+}
+
+[component="Terrain"][contentEditable]:hover > p {
+  padding-left: 16px;
+  margin-left: -16px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAtklEQVQ4y+2SMQrCYAxGX9JOUhCXgngAsXOL4NTZ0TM4uXqBHsLVGzh2dS6F/w5eQaXSqY2T4KAd/Fe/LYE8kkfAMwJQVdUkCIKdqq6BOTA2sw64i8glTdPlN0BY1/VCVc8iMn01y7IMkyTROI5HURRdhzYIVfXwPgxQFEUHdMDNOTd4gorIyseBAg9fwMkL0DTN3syOZtb/BMjz/JFl2bZt21nf9xvfv8A5Z0P1Jwf4SvwDPPMEUXs1lBIvWKcAAAAASUVORK5CYII=');
+  background-repeat: no-repeat;
+  background-position: 2px top;
+}
+
+[component="Terrain"] a.file[uploading] {
+  padding-left: 16px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///x6Q/8nk/lis/h6Q/3S6/pDI/p7P/iH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
+}
+
+[component="Terrain"] code {
+  border: solid #E0E0E0 1px;
+  background-color: #FAFAFA;
+  font-family: monospace;
+  border-radius: 2px;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, 'Ubuntu Mono', monospace;
+}
+
+[component="Terrain"] > code {
+  font-size: 12px;
+  display: block;
+  margin: 2rem 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  min-height: 1.5rem;
+}
+
+[component="Terrain"] > blockquote {
+  display: block;
+  padding: 1rem 4rem;
+  margin: 2rem 0rem;
+  color: gray;
+  font-style: oblique;
+  background-repeat: no-repeat;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAiCAYAAAAkjjtxAAACw0lEQVRYw9WYTWgTQRTH/29SQgsieLBNj+olol5EkIpCvfh1kBYv9iiSzCYIEkHxGASxtBWMh2Q34iXgwYPeRCp4VIogol6sF/XiRopK/Ugsmhkv2bDkq5OdV8G5LMy8fb//eztfb4H/rFGvgXK5PKaUOg1gGsA2IhoDsKq1fgXgTrVareTzeWUDj8LoEJzP5ymRSGSJaBbApl4wrfUzIcTJdDr9aVChNgxqdzQ+Pn4bwBkTsNb6DRHtl1J+G0SsDUOEBxOJxLypIwAgoiSAG4Nk15bRynCpVJoQQjzpN697JQHATinl8nqGHAwRimQhgqMg6LOG2bJmCABwXXcPER2Iutq11pPr2XAxRDPyU5bb4w6D7LIwRFP9hKWzzQYZYmEEczhpdfoQ/TAwY2EEgrfYONNavzUwY2EEgkcso39sYMbCCAT/tIj8D4BbBqYsjGCX+GgR+VUp5TsDOxZGsEssR4zc833/iqEtC2Oo+XwKYMrg5QaAFQBLAFzHcRYHYLMwhpopfwhgroePjO/7Zdu7LxeDQkfnayLa3W4ghBhJpVK/OKoFDkb4enmzm0Gj0RhlrHCsGS3B9Xq9AuBDF5uDXGo5GC3BuVxuTWt9qcvcm+ESzMHouJt6nne/WRSGV+4+x3Gecwm3YYgufSkA79sL3EKhEGecy5EZHYKllJ+VUlNa69XQJ9s7PDw8x6XWhiG6boqZzEsAx7TW30Pd5z3Pu8AlOipD9BpwHGeJiI4D+BrqXuAUHYWxbkHoum4SwAMi2h7qnvd9/7Lt6ReFYVTBFovFrbFY7B6AQ6FV/UgIMZNOp79wiDZlCBNn2Wx2JR6PHwZwrfmPAER0RCn1wvO8SQ7BpgyK8PmOElEFwGjoJ8d1KeVFrrndjyEiLJRFpdQuAHdDQf9m3KP7MsgyE9NEdK5Wq53I5XJr2ID2Lxgb2v4Cp8uQ4F531d4AAAAASUVORK5CYII=');
+}
+
+[component="Terrain"] table {
+  margin: auto;
+  min-width: 20rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 99%;
+}
+
+[component="Terrain"] td {
+  border: solid gray 1px;
+}
+
+[component="Terrain"] > h2:hover:before,
+[component="Terrain"] > h3:hover:before,
+[component="Terrain"] > h4:hover:before,
+[component="Terrain"] > h5:hover:before,
+[component="Terrain"] > h6:hover:before {
+  content: '';
+  position: absolute;
+  margin-left: -60px;
+  font-size: 10px;
+  font-weight: normal;
+  /*  outline: none !important;
+  border: solid white;*/
+
+  vertical-align: middle;
+  color: gray;
+}
+
+[component="Terrain"] > h2:hover:before {
+  content: 'Level 1';
+}
+
+[component="Terrain"] > h3:hover:before {
+  content: 'Level 2';
+}
+
+[component="Terrain"] > h4:hover:before {
+  content: 'Level 3';
+}
+
+[component="Terrain"] > h5:hover:before {
+  content: 'Level 4';
+}
+
+[component="Terrain"] > h6:hover:before {
+  content: 'Level 5';
+}
+
+[component="Terrain"] figure,
+[component="Terrain"] figure img,
+[component="Terrain"] figure figcaption {
+  display: block;
+  width: 20rem;
+  max-width: 100%;
+}
+
+[component="Terrain"] figure {
+  margin: 2rem auto;
+}
+
+[component="Terrain"] figure figcaption {
+  margin-top: 0.4rem;
+  border-top: solid silver 1px;
+  font-size: 0.8rem;
+  color: gray;
+}

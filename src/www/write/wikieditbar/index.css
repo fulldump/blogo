@@ -1,0 +1,175 @@
+[data-component="WikiEditBar"] {
+  margin-bottom: 1rem;
+}
+
+[data-component="WikiEditBar"] #bar {
+  background-color: white;
+  padding: 0.8rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  position: absolute;
+  z-index: 999999;
+  left: 0;
+  right: 0;
+}
+
+[data-component="WikiEditBar"].fixed #bar {
+  top: 0;
+  position: fixed;
+}
+
+[data-component="WikiEditBar"].shadowed #bar {
+  transition: box-shadow 0.5s ease;
+  box-shadow: 0 0 1rem rgba(0,0,0,0.4);
+}
+
+[data-component="WikiEditBar"].fixed #bar,
+[data-component="WikiEditBar"].shadowed #bar {
+  z-index: 9999999;
+}
+
+[data-component="WikiEditBar"] #spacer {
+  height: 4rem;
+}
+
+[data-component="WikiEditBar"] .group {
+  display: inline-block;
+  padding-right: 2rem;
+  height: 2.4rem;
+  overflow: hidden;
+}
+
+[data-component="WikiEditBar"] button {
+  display: inline-block;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-color: inherit;
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  vertical-align: top;
+}
+
+[data-component="WikiEditBar"][data-am_i_editing="false"] {
+  display: none;
+}
+
+[data-component="WikiEditBar"] button:focus {
+  outline: none;
+}
+
+[data-component="WikiEditBar"] button:hover {
+  background-color: cornflowerblue;
+}
+
+[data-component="WikiEditBar"] button#bold {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sKHgcDNTaK/yQAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA+0lEQVRYw+2WMWpCQRRFj59vrCRNGusUAdtLIBtInQVkBzaRpAgGG0GQFIGPO0jhDizSpE3lq1LFHdgGRDEoaWbARvIRmUEyFwbeg8flcN8wDCQl/XdVygxJyoHc92a23DFX2/Jcm9nPX95ZSdAusPBH0uWOufetuUEZ42zP5IaSskOsYF+TK+A2JgDAs6R6TIAG8BQD4BP4cvW9pPPQACug7eoT4CX4CszsDRi79kbSdYw78AD4h6aQVA0KYGZToHBtE2iFTgCgD8xc3QPOggKY2TfQce0pcBE6AYBXYBLjEvoUNsBdNAAH8QGMogE4PQLz9MVKSko6Ov0C5dI1ZjD4H1UAAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#italic {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAd0SU1FB9sKHgcENA7MWXUAAAE6SURBVFjD7ZW9SgNREIW/rFELC20sRB9ALJ2QvIJFKiurJGiRp7ATbMQnsBIbsREs9QFUOFqlEXwDsfAHUcTYDDJuYbGbXQX3wMKZ2Z17DzPn7oUKFf47alkLzWwMGPdwKOk1yzpJDvF94MWfg6yL5BHQDPzytwVclCrAzKaBRQ8/gKusAuoZ6xrBwANJTy4sAXaAVX93DXQkPY5aQCvdfjOrA3tA1/OnQPenzfN44JsBzWwSOAyb7wNtSQ8j94CZ1VICBsBJaPs20JP0VpQHFoC5YMDdMJJNSVtFn4Jmqj76YaaMY9hKxc+Bd8xsoswOCFgG3j2eBdqFCfALqBFSa5JugLOQ2yiyA0vAlPM74Nb5UfhmxczmixIQ238uaej8OIwhAXplCPi6gCTdp8aw7r/lChUqVPj7+AT0dExUuIQWJQAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#underline {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAd0SU1FB9sKHgcFF7WwGUYAAAF3SURBVFjD7dW9apVBEAbgx3g04k8lBlwTNSKIWK5oY2magGBh6RXYaucNKF5BipSioJUgpAgE/7CQUVTQNAEjwhZaqYiKeGxW+AgGzjnxs/F7u9mZfd/Z2ZldOnTo0OF/x+aNbM45j6eUxkopP0fl2DSC6BQuYxaT6OMtFnA1It60lkDOeT+eYvc6IZ9wMiJeD8o5NmQBrjTEn+AiLuBBXduFuTYrsIJD1TwVEY/q+jasYge+Y29EfGsjgWUcqeYHXMdd3B9UcKMJXMK1P7i+YBE3cDsifrQyhimlx3iFCRxoHGBLrcw5HE8p3Syl9FsZw0Y1JnAGZzGD8YZ7JiIWB+HpDSF4uIrBakTcwjzmc857sIRj1X9wUN7ekAf/ff+fc87vca9yTGFnI+55Gwms1EY7XcWW8LW+JVsbcQ/x7K83YSlFSukOpnG0CvfWcCzgfER8bO0vqP0wiRPYh+14hxcR8bK1dyDn3B+GOCJGnrAOHTr8U/wCOepiUs5LZ0EAAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#strike {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAJdJREFUWMNjYBgFo2AUUACMjY1FjY2NV1FiBhMFlocyMDBcZWBgCKXEASwU6F1FjVBkGuhoZCQj6P/jkjt79izjkAuBoRcF2KKCnKAfUiHwn5bmj0YBVRxgbGw8ICHwF4mtaGxsLE1vB7xHYt9lYGDoorcDjqLx9ehdG+YyMDBwMDAw2DMwMPxgYGC4PNpCGgWjYBQMSQAADDUaCOs/vy0AAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#remove-format {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAATBJREFUWMPtlr1KQ0EQhT8lYmFAG638KVIJsfABRIUDipDKgBBIYyP6AhYWFvY+gFhbCAqCENER0qRUiYWPIAjWij8xNhtY5ApGsvc2e6qZM7vwMQuzA1FRURmr768HzWwTWHPpgaSjXgDkujhbAOZdfNGrDvRn/QSZA+T+e9HMhoF1YBZ4Aa6BE0lfaXRgBngA9oEqsAEcA3UzG0kDoAKMAjXgEmg5fw44TAPgA1iUtCJpCSgBbVdbNbPp0ABnkhqdRFINqHt1hQZoJnh3XjwVGuAzwXv14oHQAJMJ3pgXP4cGKJnZkDcTBoFlr34behCNA+dmtuNavwtMuNoTcBUa4AZYABo//DawJek99BNsA3tuBHf0CJQlnQbZB375D/JAEXgD7iW14ooVFRXVrb4Bxy5ENcDADLcAAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#ordered-list {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAn5JREFUWMPt1k2IlVUYB/Df5HUcvwbzA0LELPrAFqZu0kUJ8qgoWouobDSCIBBdKLgRCl0IiSAqWO4CF1qLoHJjFA+6EaICtShRhHSlJaOFoqYm4+ZceBnuvc4dJ9GYB17el/953vN8nPP/n8OwDdtDbqPxFab/VwE6Wow9jf2YhxdwCjJzIroi4nxmTsdfqKETE3ArIs4W3wmYiV8j4mqjII+1SGAKPsD1fvh72Fm+P8MSvIsfsQW/ZebszJyL09iM05n5bLsJ/IAjbXTzZET04Diex1rsi4il+BZr2k2gmd0p7YaJFfxaed8uS/sPxhdsfINODjqBo1iYmUcwsoXfbkRmnsEz+HjIdm5mjs7MzgH4dWTm44+sBryOi7iEdU0q3JaZi+8nSK3F2C4sL5vpe3xSCTwDozCnUK0h5zNzJsbieETcaVeI6jYX27GoTLqk8P9wwTbgF3yDY3gRC/AaXsVl3IiItwfDgiexDasrWA/2RsQb9eqbcL4LT+EP7GkWoFUCPeXHVfizgt9Ed2Z2lPZqwvlD2FQ6cDgza+0uQS8m9ffNzNn4DucxBh8VbThUfK4VeV5WpLwX5yJi5VDqQGdmdt2L88Vv3COrAzvwd3m2VKoalZnLHsR9oG4v42D94MnMjUWkVqCvnAfT8DOmYnLhfd9AdKB2j+CrsA+fVrCleA6LC0034vdy2Gwt1LyUmceqOoBB6cABzMI7FWw/TkTE5/V7Q0S8hDdxojDkLTxxvzpwtrS2F1cqeF8DuipVXihJfIgvB6IDrZZgfZnsNt6v4OcwPzM39PPfiS/wCn4qldd14OuI+HcodaA7M0c0wGuZ2f2/0YFheyB2F5O25gpc6S4lAAAAAElFTkSuQmCC');
+}
+
+[data-component="WikiEditBar"] button#unordered-list {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAjBJREFUWMPt1k2I1lUUBvDf1Ns4fTiYtIiQMqTCldosyk1tDsrMIhehlQiBq0gXgRuh0IVQOwmK1i2kgkBcTSQPunGhyfgBFkiarqyF1iLULGXaXGGQ9x19p3c205zNuf9zD+fr3ue5fxZlUf7vMtRrY2xsbBUu4Di2TU1NXYQkyzFSVVeSPIs/0MEwluHvqrrUfJdhNc5V1Z/d8jw0S3EHmn51xhq2Y39bf4WNeBc/YC9+TLI2ycs4jz04n+SFfgvoV36qqq04jZfwPr6sqnF8j/f6LWBb08dnrOFOGzcsn2G/3vQ/7Wj/wtJmW4ob3ZJ0emVvZ97tjhzD3iRH8cgsDXyKySQ/t+J2DGzWSR5NMvwAfkNJnly4GE7ySZIN/yVGp18eaIlXYgnWNah1xXyS1Xgcp6vqTl8FdOGB9S3oxob/I23vm4b573AKa5K8jk14A7/jJt4ZFA9sxRdVtflu9z0wP4Ln8Rs+6xVsLjxwC6NJhtp49cD8JHa3CRxJ0unrLZjl4q3FYVzBY/i4ccNki3e90fMEPsRVXK6qtwd5+4eTjNwP883viQWH/SVJJgYVby48sBNvJjmB6fYerMBZPIOnGu6n54UHMI4XsQHPYRd+wefY16B5Lcmp+eKBAzhTVV+37xNV9Qq24ExDyFt4er54YPoev6tN38SvrYiPcPBBeGAu/wOXsT7JB/fY9+NbvIaTrfO7PHCoqm4PEgmjSR7uYu8kGV3YPLAog5Z/AUiD7/tO6hjkAAAAAElFTkSuQmCC');
+}
+
+[data-component="WikiEditBar"] button#superscript {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAdpJREFUWMPt1k2IjlEUB/DfjPedUMJCGhsLCx+huLJAUe5iZGVDjYWsKKNkZyMfJdnYYiELQpOyscDdkjJXioWFjVLja5Sm0WSYsblvPU0mvDPvSL3/1fmfe7rnnHue/70PbbTxj9HRik1DCEuxG8vxA49zzulXsZ0tamwrTmEnevEwhHBx1o41hNA5iV8KIYyFEBbOyggqiWvowjbcx4ac8/NqTK1FiXfgPDZhDr5Mla+zBcmX4B5GsB0rcXKq+D86gZTSFqwvdALXY4wjZa2Gg6VT/f39HQMDA/NxNuf8qBS1bFoF4G3palHhq3Gs2CdwpthD9Xq9B+M4FEIYxGd0T/seSCntw61Cx7EFo3iKevHviTHeDSH04RwWVLYYxeac84umVZBSuoYDhb4shTRGcznGeLjyLdTLRVQrp/Ax5zzR7AgaOFoktQJrK/5XOF4NzDmP4fXvNvwrFcQYh7Ef3yvub+iNMX5tRjXNyPANhif5JpqVbTMFXMXiCu/CjZTS3JYXkFI6gl2FvsP7Yq/BhZY+xymlVXiGeQ3JlQbuVMbQE2N8MOMFpJTqeIKNxXUzxthb1m5jb/EPYl2McWimR3C6kvxDkWMDffhU7G5caf/ntdFGG/8VfgLgF3ujzEHbZAAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#subscript {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAadJREFUWMPt1k2IjVEYB/CfcUeskCJZKeWjGQtvNrOwOgvKxmKosZCd8hE2N0uysrQbC1mYfKWkbLhlKzqzomwslKLJLDRI4l6b59bbFO57P2Lx/uut5+Ocnv97zv95OtSoUaNGjX+MFb0sarVaU9gdbgc3U0pfItfAcayM/HxK6XmvBBo9rnuHR1gX/k6cDfsCLoW9iMmhn0D86RHcDreNKXzDC4xH/FBK6cFICASJGzgW7ssg0r2a2ZTSiaoaGKu4/jTehD1RKv4a5/sRYSUCKaUlHMWPUvg7ZlJKX0dOIPAWS8tinX7bsB8C17G+5K/CXKvVWt0PgUZFEZ7EgXA/hIg3YReu4ExRFBuwd9nWds758aBtuAPzWNNtuTjB+6Vr2N9sNj9htrR1G37mnNcOMgnH8Qx7InQrpTQTuTs4HPH3mEwpLUJRFPvwBNM554eDaOBiqfhCtGMXp/Ax7M24FsW34C4u/6545UHUK4qiGMNTfMbBnHNnKCKsgHPYjok/FR/JCRRFsRWv0MS9Umoh59wexhz4G6ajU66GKLvfxvr1U+O/xC8IlHH5A7mudAAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#code {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7UlEQVRYw+2Wv2/TQBiGn6+OpViBkiZ0YonUIZIHL6dk6VhY+QNgr8SGBEIVkSox8BfQFYkdCdGZJXPSk7yQPRQhVKFKhSEp5PyxHKhUDXF+MOF3Olvvd358991rQ6FC/7skj6nVatWcc89F5Laq3hKRyFr7R60xRlV1BHwC3gVB0On3+6ez5i7lAXDOvRCRewAi05lFJAK2gC3n3Dpwf9bca7mWSeSOHz4Ablx+ewBrrQRBsK6qu5dqlgcAbgKMRqOX1tqv00y9Xu/beDx+5S/rqwQQgMFg8GOW8YJnbSUA7Xb7uh+ez9Hc3wGazea1ZQAkSZLNyWTyFEBVB3mfrqrvASqVSidJks2/nbapAMaYLAzDExHZA46yLNvNC+C9RyKyF4bhiTEmW6YHFDgrlUqf8wJ475mvXWwLrLWBc66hqm+AnSzLDuZYgQNgB3jtnGtYa4NFViBL03Q4mUwe++vtOZpw2wfYkzRNh8DiW1Cr1Y59sNRy57tIHaBarX5c+hh2u103Z2b8zo0LtUsH0T9TXoBzgDiON2YZf3lUdbxKgA8A5XL5kTGmPi1Y4jjeiKLooe+D41UCHPpJO8CXq4LFGKNRFJ0C+/7W21yZkRNgX1WdiNxV1Yb/7l8VwSNgCByKyLPif69QoUJ59BPeFK6RfcEJUAAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#quotes {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABV0lEQVRYw+2VPUtDMRSG3/e2fqx6pwbBOzumg+JeUCf/gVvBRRCEbv4C906CIDjprri5py1UcNCliKRruwitvcfFFhGbtNxAl/tuyXk4eTgJBMiTJ8+CQ0890lqfAqiS3BSRVxE5azabD4F4t4DW+ork0e89ERmS1MaY56w8AETTDi+Xywd/mwEAySUROc/KewVEpDp1bORuVt4rAGDbIbcegPcKxI5aJwDvFeg5ajcBeLcAybd/RjkUkTuSF1n5cYqOe3skuTNeDwaDjXa7/RGK904gTdNLEfmamBaLq65G8/JegVar1QFQn4BRVHE1mpef5RGCZA3Ay8+yliTJSkjeK2CM+RyNRvsi8g4gieO4HpIHgIIP6Ha7PaXULYA9AJVSqZRaa59C8YVZ7sla21dKXYvIFsljpdSatfY+BB/N+m8bY/qNRuMQwImILIfm8+TJk2dh+QZ0gd8pJ5MYMwAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#image {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMQFy8oSw2tfAAAAz9JREFUWMPtlk1vW0UUhp+Ze6+dXH8kTpo4DkkapSFBICCthMSiVLBgCQu+CkJdsaYgfgC7IrFCIP4BCFCLxE9AouyQSivStIIEIRTXbhQnThzs3tyZOSxuCEGKbdlIbMgrjUb3zsw573nnzJmBE5zg/w7VafCddy+rwshQOggC1Y9xE8dSr+1EH338ifRM4MoHV7xSqfj6eLH4moIcIH0E17i/Ub2612h8dfnt9+xxk/x2q0dHhucXFxc/P7t0DuekL2mVVvx488aLP925/QPw83HzdFsDHnNTU9NYE6OwopSjlwZWrImZemgaxJ1p56etAoJo3/f49rvrfPbFl8oY84/oumkS+L669OYbnFtaAnFtA9WdZVTcq1R40KyT8gwpz6BtCxPt4hEd/kt5MSkdH/k2tJp1yvcqKNU5f/1OgyJJtOOhYyhrD0hptur77O7VyeRy5HMDPIhi0ikfT2uMdfzR2mdwQCVKdZGqMwEElHAqYxnLm0R3BaV8iFYh1c0dVn+rsjA7SnEkR2VzF2LDcKCwOgAliY0O0N0UEEkITOYMk3mT9LmY5u4W88UU2jY5OzvIRDbm8emAO6vrPDaTZmpYISL/TgFwAJwKHZN5d2jMGMfEQsittTpxFDE3CvuxcOOXOq+eLzE3qlDOEh2x0ccp+CsHhLGMYzJv8EMfb8BHaXCx4eGpYdY3trl5t0w+E3Bm3Gd+cgAw7DUtZRIFpP8cABHHSGgolQZILT5FMLaAiCGu3MKUV3j/0gxvfbjMc08UeOH5ErGxKAWbu5Z1cV2Pa+ctOKBfyDqyi/Mw9zQQohDSuSxpKcNGjaW5kDBwDGZh0CQuC4NHbPSfA0IURXz6fYvx5RV0uozSCqUEEYtrbWNbEcuVNHdrmt+vNnEHDjcbhoULUdeS1ZGAMYZnnr3AzOxpxLm25erJQyd/Fx2lFbOzpzlaQXsioEXb2BqGh4bIPPpIt5v7WPWCIMV+ZNCibc91oNaor6ytrm5rPDQ+Sd9LS9b8urZW29lp3O75PTBSKKReufjyS8WJ4nmceCLSkwRKK1EoW63ev37t2tffbG/V93t+ER2M+wdK9b4HSRUyfTxmTnCCE/x3+BNtyWTKYdqKLQAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#title {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASUlEQVRYw+2UsQ0AMAjDoC/xAmfzAjfRA9oVwWCPLEGxFBGAYfR3NLPqCMvMJ+9MN8ADADuHKCJahsjdlcpRgAIqRwEKqBzWcQGdehgN3ecmnAAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#file {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABSElEQVRYw+2UvUoDURSEv/zUCqa7ZVBUsJsqFhZRy8TO50gZyEP4GhIEg3Zqa3mIhYKFtbexiHaBBG1usUiyyf7ZuAO32HPPzgznzC6UKPHfUcvysqSBc+7Qe/+YlqOSQfwOOA2PN2Z29mcTkDQEOpHSrnNu23t/XfgEJD0Ax0uub82sm4SvmlB8FCMO0JF0WcgKgvg6ez5wzu17769yW4Gke+Ak4bbWCmZtDfE94Ah4Bl6BnZjVzYAR8AJUnXNP3vuPvEP4CWwsuf4ys80iQ1jPoye1gSJQGkhq4HtFcCuhJ7sBST1JrWjNzObAJIZvEnqiPC1JvTQTuAAW/dfbwHv45ufhzEKtvaC/G7hSrWD+u2Bmb0ATaABb4TSAZrhbyRFFPU1wzGwKTPMIYZyBMdCXlFWjH7gSGzgHhsAgo4Fx4CpRosRC/AB65FxeJ96tMQAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#href {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAANRJREFUWMPtlq0KAkEQgL89DrNgVPA5TKIIgmGSaDRp8iF8AsEnMNqnWLxgsFosBt9CiyCs5cIhBm859k7YL83sHx8zy7IQCARKxvy6UMSOgWWaqqpZFyEQ51jbArppfC2qAlHZLShdIHbdKGIjYAL0gRpwBraq5u6jAnXgCOyAOTADNsBFxDZ9CEyBDpAAe+CVjreBlQ8BCwxVzUDVjIBFZq7nQ+CkapJMfsjEDR8Ct4/84XqxXQWeX1qS+3UND1EQqITAf3xIRKx1OVzVGAKBQNV5A6JNJhVNkehPAAAAAElFTkSuQmCC');
+}
+
+[data-component="WikiEditBar"] button#wikiref {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC2klEQVRYw+2VT0+cVRTGf899ZximNcg0baxRo2mI1dhB6mve4nQSMi2ByKIxRupHcOkXMCGu/QwuTFyxcEEILUVDSNoCIqiMGUNDUgyW1EjokBbN/Hnv6aK2ArbIny66mGd5n3PP/SXnnHugoYYaaugZlnLdV96NopGWx9umzp7LUf782IknJcgVLp3MFS6d3OkR9yQjf+7bbOD4qqk18fFjk/eMfpiQ+4bAfxF2jR/d7ofh0CElg8+UcJ+2t48e3jOAd34VUZP0Xhj+kNzqDgbCnQPugqKmpmr79vuplsMvCoWSbs/P9/y1Z4DySnkVowg+m3j+1pHN3pneY684KcL4Gun3hKML0JbEyVoWLGNmMyDbM0CpdLFqZjOGXhapV7dc8tVOzDLeMyps0kyFjvzIpjIMOLOgA1GWdwv76gGAemxTGJZIBGceHfYPBoHoRBTvyX713sYlXkqngzf/rX/YLPksMHs7Wbu1bwD9rSWw34RFD/sgd6f1BVDkjWvzY70bcVydM2M9kBUeliHdmj4uudcxTS9e7qvsG2B9fb0M/GLiVCqzduyf4w6koxbH1wBS8XN/ANfB5cPusRYAc/4tsIzFFP9v1ncEKJUuVkHfYxwXOgEDTrKzwhbK9btFgImJQt2jcaCt2TgNIKcsxorJbhwIACCO9ZNELBefDrvCI07KeW/TpYn+jUe9Yn4OcU+BnQ/DoUPAOwY/Vu7c/PPAAEGltoRpGQhTyeYIeA3Z9ObRWrsZr2BMY5xNtSbflnEKNDs7+0ntwABXr76/avJTknvDOfoMlr1t/Lw5ZnGxr4JnAqc2BUE/UtrH9eJu/nu3i5VgFmsSaAM+MJiaHJtf/U+pnJ8RVpH0kZkt1UjceEoAUKvVr5sxDMx5s2H43G+PmbzSu+DNf4m3ZTMbnPmue+2prsYoGmnJ5oczO0cNuAeLybTrlbuboAsXzPYDPTQk0VBDDT3rug/4XSMqJ/8IsQAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] .group#title {
+  overflow: hidden;
+}
+
+[data-component="WikiEditBar"] .group#title > div {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.4rem;
+  max-width: 0;
+  transition: max-width 0.5s ease;
+}
+
+[data-component="WikiEditBar"] .group#title:hover > div {
+  max-width: 12rem;
+}
+
+
+[data-component="WikiEditBar"] button#title {
+  transition: margin-left 0.5s ease;
+}
+
+[data-component="WikiEditBar"] .group#title:hover button#title {
+  margin-left: -2.4rem;
+}
+
+
+[data-component="WikiEditBar"] button#title-1 {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAlUlEQVRYw2NgGAWjYIABIzZBY2Pj/7Sw7OzZsxj2MQ10CIw6YBSMgsFZEO3Zs4dgQXTv3j2G+vp6hufPnzPs2bOHKMtcXFwYqeFoEwYGhnkMDAy/GRgY/kMxXcEjqKVnqOEAkqNg4sSJDAICAgyRkZEMXl5eMPV0jQJkQHEIMA3ZXAAN0tEoGI2C0SgY8CgYBaOAYgAAPB0+g6EfVU8AAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#title-2 {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABD0lEQVRYw+2UsUqGUBiGH1OnbiEwnBraHFsyxF30EiTwKpoC8VLaHAKHsxSudgENLUJjuAiCcGyxhvIv4v/1NJwHznKG836873de0GgUYyxdep43rSHWNM03vSPVDugBNJr/WURCiMUiGseRsiwRQtC2LYZh4LouURTh+/6vYkEQGPsO/AhMO066hWO3wANwCRwDp8DdPMDz6hEMw4Bt25im+XnXdR1JkmBZFlVVrR7BEmezA08qltgE7gEJ+KtH8DWOPM+p65osy4jjeJNf8MHJbPkIXG9t+znwCrwBV5sWUd/3pGmKlJKiKHAc509ih4jgZt74C1XV/fJDE06rRxCGIVLKnY8JIZQUkUazF+/JIGJqSJ17RwAAAABJRU5ErkJggg==');
+}
+
+[data-component="WikiEditBar"] button#title-3 {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJUlEQVRYw+2WvUrEQBSFv1Xy04ikEiIqZGurkDIuQvqASZmItfg0ttZbWDuwTXwCSYpACrFKl8IUmxdYmyCyRgXXyVrMB4EhzT2cM/cwoFBsmcnQT9d1VzKG5Xn+ad7Oth1QAhSK/1lEWZYNFlFVVQghKMuStm0xDIPpdEoYhsxmsx+HBUEw2VRwCay++K7HcCwFboBDQAOOgNteQC09giGWyyVRFGGaJkII6RGsiz8G7noH7se+wB/zfwD2R40gCIL3s+M4pGmK7/ujRrALHAAXwHPvxOW2+uTkt5uw8RYANE1DkiRomsZisZAawRVwDlj9W2IPOAOeegceZVv98k0TvgKnUiOYz+cURUFd13Rdh67r2LaN53nEcYxlWaNugULxJ7wBdWlf8cnWA6wAAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#title-4 {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAy0lEQVRYw+2WMQ7CIBSGv2qMF3F16tI4OfQC3KPH6Mglmq6arh16hS4uchIHY4ILTZpoUCOCw/sSBl6AH94fHoAgJCZ7Fszz3P5CbBzHB71F6gzIBgThPwvRMAxvFaK+79FaT3Neji/LMgu5+S1wAaxrUVkBp5m4jWpB0zS0bYtSiq7roluwAa7AGVinsODgBPeuH88CYwxVVVEUBXVdT2mNasHRnXY3i4XPgIcbsAy55kcWTOn24bMidCEKYkHyD8lXb0GKWyAIwbkDTZ9LyrU/TbgAAAAASUVORK5CYII=');
+}
+
+[data-component="WikiEditBar"] button#title-5 {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABGUlEQVRYw+2UsWqEQBRFzyaNEAgRUtv5BTZpJBAsLAKCkD6ViORzAuYLbPyF6bQV0myTqOAHSMBKWGHTTBGIawjZWVPMgcfADMx73DtzQaNZmc3cpuM4exXNqqr61u9sbQX0ABrN/wwiIcRsEE3ThO/7ixcKIQ6eeZ63+evAV8D+h1KaA5dyraV6c6XOgrZtiaII27ZJ0/TX8h3DgtsvUn8Ar0AK3Jzq0T4seP+s3AKA3W7HOI70fU/TNBRFQVmWACRJQhiGSi04xJNUYbtWnlzIAUblFsxR1zVxHGOaJnmeK7XgEbgDTOBcBtM98CYVeFEt9fvCL9gC10otyLKMqqrouo5hGDAMA8uycF2XIAgwDEN5EGk0R+cTwadsOdHQgE8AAAAASUVORK5CYII=');
+}
