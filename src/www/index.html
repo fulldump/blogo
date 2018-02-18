@@ -1,26 +1,28 @@
 {{define "content"}}
 
-			{{range .articles}}
-			<div id="{{.Id}}">
-				<h2><a href="/a/{{.Id}}">{{.Title}}</a> <button class="button-remove" onclick="removeArticle('{{.Id}}')">Borrar</button> </h2>
-                <p> <time datetime="{{.CreateDate }}">{{.CreateDate }}</time> </p>
-				<p>{{.Content}}</p>
-			</div>
-			{{end}}
+    {{range .articles}}
+    <section class="article" id="{{.Id}}">
+        <h1><a href="/a/{{.Id}}">{{.Title}}</a></h1>
+        <time datetime="{{.CreateDate }}">{{.CreateDate }}</time>
+        <p>{{.Content}}</p>
+    </section>
+    {{end}}
 
-			{{if .user}}
-			<div class="create-form">
-				<input type="text" id="create-form-title" placeholder="Título">
-				<textarea type="text" id="create-form-content" placeholder="Contenido..."></textarea>
+    {{if .user}}
+    <div class="create-form">
+        <input type="text" id="create-form-title" placeholder="Título">
+        <textarea type="text" id="create-form-content" placeholder="Contenido..."></textarea>
 
-				<div style="text-align: center;">
-					<button id="create-form-button" class="button-create" onclick="createArticle()">Crear</button>
-				</div>
-			</div>
-			{{else}}
-			<div style="text-align: center;">Identifícate para crear artículos</div>
-			{{end}}
+        <div style="text-align: center;">
+            <button id="create-form-button" class="button-create" onclick="createArticle()">Crear</button>
+        </div>
+    </div>
+    {{else}}
+    <div style="text-align: center;"><a id="login-to-write">Entra</a> para crear artículos</div>
+    <script>
+        document.getElementById('login-to-write').addEventListener('click', formLoginShowToggle, true);
+    </script>
 
-		<div>
+    {{end}}
+
 {{end}}
-

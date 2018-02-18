@@ -1,5 +1,7 @@
 {{define "content"}}
-			<h2>{{.article.Title}}</h2>
-            <p> <time datetime="{{.article.CreateDate }}">{{.article.CreateDate }}</time> </p>
+        <section class="article">
+            <h1>{{.article.Title}}</h1>
+            <time datetime="{{.article.CreateDate }}">{{.article.CreateDate }}</time>
             <p>{{.article.Content}}</p>
+        </section>
 {{end}}

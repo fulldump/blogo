@@ -1,10 +1,11 @@
 package statics
 
 import (
-	"github.com/fulldump/golax"
-	"strings"
-	"path/filepath"
 	"io/ioutil"
+	"path/filepath"
+	"strings"
+
+	"github.com/fulldump/golax"
 )
 
 var contentTypes = map[string]string{

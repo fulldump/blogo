@@ -14,6 +14,7 @@ import (
 	"blogo/articles"
 	"blogo/statics"
 	"blogo/users"
+	"strconv"
 	"time"
 )
 
@@ -44,7 +45,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 
 		articles_list := []interface{}{}
 
-		articles_dao.Find(nil).ForEach(func(item *kip.Item) {
+		articles_dao.Find(nil).Sort("-create_timestamp").ForEach(func(item *kip.Item) {
 			a := item.Value.(*articles.Article)
 
 			articles_list = append(articles_list, formatArticleData(a))
@@ -99,6 +100,33 @@ func formatArticleData(a *articles.Article) interface{} {
 		"Title":           a.Title,
 		"Content":         a.Content,
 		"CreateTimestamp": a.CreateTimestamp,
-		"CreateDate":      time.Unix(0, a.CreateTimestamp).Format(time.RFC3339),
+		"CreateDate":      formatTime(time.Unix(0, a.CreateTimestamp)),
 	}
+}
+
+var months = []string{
+	"Enero",
+	"Febrero",
+	"Marzo",
+	"Abril",
+	"Mayo",
+	"Junio",
+	"Julio",
+	"Agosto",
+	"Septiembre",
+	"Octubre",
+	"Noviembre",
+	"Diciembre",
+}
+
+func formatTime(t time.Time) (f string) {
+
+	f = strconv.Itoa(t.Day()) + " " + months[t.Month()]
+
+	now := time.Now()
+	if now.Year() != t.Year() {
+		f += ", " + strconv.Itoa(t.Year())
+	}
+
+	return
 }

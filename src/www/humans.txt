@@ -1,0 +1,14 @@
+
+  .ooooooo.  oooo
+ d8Y´   `Y8b `888
+ 888     888  888   .ooooo.   .oooooooo  .ooooo.
+ '888ooo888'  888  d88' `88b 888' `88b  d88' `88b
+ d88´   `88b  888  888   888 888   888  888   888
+ 888.   .888  888  888   888 `88bod8P'  888   888
+ '888bod888' o888o `Y8bod8P' `8oooooo.  `Y8bod8P'
+                             d"     YD
+                             "Y88888P'
+
+Blogo is a free software decentralized, federated blog system
+maintained by a guy and maybe a second guy. It is 3am and this
+is the most fancy human message I can write.

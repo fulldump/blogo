@@ -32,8 +32,12 @@ func main() {
 	channel_audits := make(chan *goaudit.Audit, 1000000)  // Buffered channel, 100 items
 	goaudit.Chan2Mongo(channel_audits, db.C("").Database) // do the job: channel -> mongo
 
+	if c.Statics != "" {
+		fmt.Println("Using custom statics dir...", c.Statics)
+	}
+
 	// Buid API
-	a := api.Build(articles_dao, sessions_dao, users_dao, audits_dao, &c.Google, c.Statics, c.GoogleAnalytics, channel_audits, c)
+	a := api.Build(articles_dao, sessions_dao, users_dao, audits_dao, &c.Google, c.GoogleAnalytics, c.Statics, channel_audits, c)
 
 	// Serve
 	s := &http.Server{

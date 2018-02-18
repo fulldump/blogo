@@ -1,0 +1,212 @@
+body {
+  font-family: Ubuntu, Arial, sans-serif;
+  font-size: 120%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: dodgerblue;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration-line: underline;
+}
+
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 54px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  background-color: white;
+}
+
+.toolbar .cirle-button {
+  display: block;
+  float: left;
+  padding: 4px;
+}
+
+.toolbar .cirle-button img {
+  display: block;
+}
+
+.toolbar .logo {
+  background-color: red;
+  height: 0;
+  display: block;
+  text-align: center;
+}
+
+.toolbar + div {
+  margin-top: 54px;
+}
+
+.wcenter {
+  max-width: 800px;
+  margin: auto;
+  padding: 0 8px;
+}
+
+.main {
+  padding: 32px 0;
+}
+
+.button-remove {
+  background-color: red;
+  color:white;
+  border: solid #660000 1px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button-create {
+  background-color: blue;
+  color:white;
+  border: solid #000066 1px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.create-form {
+  border: solid gray 1px;
+  border-radius: 4px;
+  background-color: #F8F8F8;
+  padding: 16px;
+}
+
+#create-form-title {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+#create-form-content {
+  display: block;
+  width: 100%;
+}
+
+.auth {
+  float: right;
+  border: solid red 1px;
+}
+
+.article {
+  padding: 16px 32px 16px;
+  margin-bottom: 16px;
+}
+
+.article:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.article h1 {
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-weight: 800;
+}
+
+.article h1 a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.article h1:hover a {
+  text-decoration: underline blue;
+}
+
+.article time {
+  color: gray;
+  font-size: 90%;
+  font-weight: 100;
+}
+
+.footer {
+  margin-top: 32px;
+  min-height: 64px;
+  border-top: solid silver 1px;
+  text-align: center;
+  padding: 16px;
+  color: gray;
+  font-size: 80%;
+}
+
+.footer a {
+  color: inherit;
+}
+
+
+/* LOGIN PANEL */
+[component="login-panel"] {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+}
+
+[component="login-panel"] form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 32px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 0 10px white;
+  min-width: 280px;
+}
+
+[component="login-panel"] form label {
+  display: block;
+  overflow: hidden;
+}
+
+[component="login-panel"] form label input {
+  display: block;
+  float: right;
+  border: solid silver 1px;
+}
+
+/* Component: trunk button */
+[component="TrunkButton"] {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 12px;
+  margin: 0px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: solid 1px;
+  text-transform: capitalize;
+  font-size: 14px;
+  text-align: center;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  /* custom styles */
+  color: #333;
+  background-color: white;
+  border-color: #adadad;
+}
+
+[component="TrunkButton"]:hover {
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+
+
+

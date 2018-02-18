@@ -2,133 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>BloGo</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>BloGo</title>
+
 		<link rel="icon" type="image/x-icon" class="js-site-favicon" href="/favicon.ico">
-		<style>
-			html {
-				font-size: 120%;
-			}
+        <link rel="stylesheet" type="text/css" href="/style.css">
 
-			.content {
-				max-width: 800px;
-				margin: auto;
-			}
+        <script src="/script.js"></script>
 
-			h1 {
-				color: #303060;
-				text-align: center;
-			}
-
-			h2 {
-				color: #3030A0;
-			}
-
-			.button-remove {
-				background-color: red;
-				color:white;
-				border: solid #660000 1px;
-				border-radius: 3px;
-				display: inline-block;
-				cursor: pointer;
-			}
-
-			.button-create {
-				background-color: blue;
-				color:white;
-				border: solid #000066 1px;
-				border-radius: 3px;
-				display: inline-block;
-				cursor: pointer;
-			}
-
-			.create-form {
-				border: solid gray 1px;
-				border-radius: 4px;
-				background-color: #F8F8F8;
-				padding: 16px;
-			}
-
-			#create-form-title {
-				display: block;
-				width: 100%;
-				font-weight: bold;
-				font-size: 150%;
-			}
-
-			#create-form-content {
-				display: block;
-				width: 100%;
-			}
-
-			.auth {
-				text-align: right;
-			}
-
-		</style>
-
-		<script>
-			function removeArticle(id) {
-				var xhr = new XMLHttpRequest();
-				xhr.open('DELETE', '/articles/'+id, true);
-				xhr.onload = function() {
-					document.getElementById(id).style.display = 'none';
-				};
-				xhr.send(null);
-			}
-
-			function createArticle() {
-
-				var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/articles', true);
-				xhr.onload = function() {
-					window.location.href = '/';
-				};
-
-				var title = document.getElementById("create-form-title");
-				var content = document.getElementById("create-form-content");
-
-				var payload = {
-					"title": title.value,
-					"content": content.value,
-				};
-
-				xhr.send(JSON.stringify(payload));
-			}
-
-			function login(e) {
-				e.preventDefault();
-
-				var email = document.getElementById("login-email");
-				var password = document.getElementById("login-password");
-
-				var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/login/email', true);
-				xhr.onload = function() {
-					window.location.href = '/';
-				};
-
-				var payload = {
-					email: email.value,
-					password: password.value,
-				};
-
-				xhr.send(JSON.stringify(payload));
-			}
-
-			function logout(e) {
-				e.preventDefault();
-
-				var xhr = new XMLHttpRequest();
-				xhr.open('DELETE', '/sessions/current', true);
-				xhr.onload = function() {
-					window.location.href = '/';
-				};
-
-				xhr.send();
-			}
-
-		</script>
 		{{if .google_analytics }}
 		<script async src="https://www.googletagmanager.com/gtag/js?id={{.google_analytics}}"></script>
 		<script>
@@ -140,37 +22,84 @@
 		{{end}}
 	</head>
 	<body>
-		<div class="content">
 
-			<div class="auth">
-				{{if .user}}
-				<form id="form-logout">
-					{{if .user.LoginGoogle }}
-					<img src="{{.user.LoginGoogle.Picture}}" style="height: 24px; vertical-align: text-bottom;">
-					{{end}}
-					{{.user.Nick}} <button>Salir</button>
-				</form>
-				<script>
-					document.getElementById('form-logout').addEventListener('submit', logout, true);
-				</script>
-				{{else}}
-				<form id="form-login">
-					<input type="text" id="login-email" placeholder="tu@email.com">
-					<input type="password" id="login-password" placeholder="contraseña">
-					<button>Entrar</button>
-				</form>
-				<a href="{{ .google_oauth_link }}">Entrar con Google</a>
-				<script>
-					document.getElementById('form-login').addEventListener('submit', login, true);
-				</script>
-				{{end}}
-			</div>
+        {{if .user}}
+        {{else}}
+        <div id="login-panel" component="login-panel">
+            <form id="form-login">
+                <label for="login-email">
+                    Usuario: <input type="text" id="login-email" placeholder="tu@email.com">
+                </label>
 
-			<a href="/"><h1>BloGo</h1></a>
+                <label for="login-password">
+                    Contraseña: <input type="password" id="login-password" placeholder="contraseña">
+                </label>
 
-			{{block "content" .}}
-				THIS IS THE CONTENT
-			{{end}}
-		<div>
+                <div style="text-align: center;">
+                    <br>
+                    <button component="TrunkButton">Entrar</button>
+                </div>
+
+                <br><br><br>
+
+                <div style="text-align: center;">
+                    También puedes <a href="{{ .google_oauth_link }}">entrar con Google</a>.
+                </div>
+            </form>
+            <script>
+                document.getElementById('form-login').addEventListener('submit', login, true);
+            </script>
+        </div>
+        {{end}}
+
+        <div class="toolbar">
+            <div class="wcenter">
+
+                <a class="logo" href="/"><img src="/img/logo.png" alt="Home"></a>
+
+                <div style="float: right;">
+                    {{if .user}}
+                        <a class="cirle-button" href="/new/">
+                            <img src="/img/icon-write.png" alt="New article">
+                        </a>
+                        <a class="cirle-button" href="/me/">
+                        {{if .user.LoginGoogle }}
+                            <img src="{{.user.LoginGoogle.Picture}}" alt="New article">
+                        {{else}}
+                            <img src="/img/icon-user.png" alt="New article">
+                        {{end}}
+                        </a>
+                        <div class="cirle-button" style="margin-top: 8px;">
+                            <button id="toolbar-logout-button" component="TrunkButton">Salir</button>
+                            <script>
+                                document.getElementById('toolbar-logout-button').addEventListener('click', logout, true);
+                            </script>
+                        </div>
+                    {{else}}
+                        <div style="margin-top: 8px;">
+                            <a id="toolbar-login-button" component="TrunkButton">Entrar</a>
+                            <script>
+                                document.getElementById('toolbar-login-button').addEventListener('click', formLoginShowToggle, true);
+                            </script>
+                        </div>
+                    {{end}}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="wcenter">
+            {{block "content" .}}
+                THIS IS THE CONTENT
+            {{end}}
+            </div>
+        </div>
+
+        <div class="wcenter">
+            <div class="footer">
+                Blogo es software libre hecho con ❤️ en España, <a href="https://github.com/fulldump/blogo">colabora en GitHub</a>.
+            </div>
+        </div>
 	</body>
 </html>

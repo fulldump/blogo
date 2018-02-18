@@ -44,5 +44,5 @@ statics:
 	$(GOCMD) run src/genstatic/genstatic.go --dir=src/www/ --package=statics > src/$(PROJECT)/statics/data.go
 
 .PHONY: run
-run:
+run: statics
 	$(GOCMD) run src/$(PROJECT)/main.go
