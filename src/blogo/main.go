@@ -17,6 +17,8 @@ func main() {
 	// Get config
 	c := config.Read()
 
+	fmt.Println(c)
+
 	// Connect to Mongo
 	db, db_err := kip.NewDatabase(c.MongoUri)
 	if nil != db_err {
