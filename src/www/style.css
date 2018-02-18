@@ -177,12 +177,14 @@ a:hover {
 [component="login-panel"] form label {
   display: block;
   overflow: hidden;
+  margin-bottom: 8px;
 }
 
 [component="login-panel"] form label input {
   display: block;
-  float: right;
+  width: 99%;  /* ñap */
   border: solid silver 1px;
+  font-size: 110%;
 }
 
 /* Component: trunk button */

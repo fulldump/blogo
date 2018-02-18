@@ -67,3 +67,9 @@ function logout(e) {
 
     xhr.send();
 }
+
+function anchorizeArticles() {
+    document.querySelectorAll('section.article p').forEach(function (item) {
+        item.innerHTML = anchorme.js(item.innerHTML);
+    });
+}
