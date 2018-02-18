@@ -12,6 +12,7 @@ import (
 
 	"blogo/sessions"
 	"blogo/users"
+	"blogo/httputils"
 )
 
 func Build(parent *golax.Node, dao_users, dao_sessions *kip.Dao, g *googleapi.GoogleApi) {
@@ -24,7 +25,7 @@ func Build(parent *golax.Node, dao_users, dao_sessions *kip.Dao, g *googleapi.Go
 		code := c.Request.URL.Query().Get("code")
 		state := c.Request.URL.Query().Get("state")
 
-		access, err := g.GetAccessTokenWithHost(code, c.Request.Host)
+		access, err := g.GetAccessTokenWithHost(code, httputils.GetHost(c.Request))
 		if nil != err {
 			fmt.Println("ERROR:", err)
 			c.Error(http.StatusBadGateway, "Google Auth GetAccessToken communication error")

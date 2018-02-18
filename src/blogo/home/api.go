@@ -12,6 +12,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 
 	"blogo/articles"
+	"blogo/httputils"
 	"blogo/statics"
 	"blogo/users"
 	"strconv"
@@ -54,7 +55,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 		err := t_home.Execute(c.Response, map[string]interface{}{
 			"user":              user,
 			"articles":          articles_list,
-			"google_oauth_link": g.CreateLinkWithHost(c.Request.URL.Path, c.Request.Host),
+			"google_oauth_link": g.CreateLinkWithHost(c.Request.URL.Path, httputils.GetHost(c.Request)),
 			"google_analytics":  google_analytics,
 		})
 
@@ -85,7 +86,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 		err = t_article.Execute(c.Response, map[string]interface{}{
 			"user":              users.GetUser(c),
 			"article":           formatArticleData(article),
-			"google_oauth_link": g.CreateLinkWithHost(c.Request.URL.Path, c.Request.Host),
+			"google_oauth_link": g.CreateLinkWithHost(c.Request.URL.Path, httputils.GetHost(c.Request)),
 			"google_analytics":  google_analytics,
 		})
 
