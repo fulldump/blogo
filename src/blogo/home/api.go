@@ -104,22 +104,24 @@ func formatArticleData(a *articles.Article) interface{} {
 	}
 }
 
-var months = []string{
-	"Enero",
-	"Febrero",
-	"Marzo",
-	"Abril",
-	"Mayo",
-	"Junio",
-	"Julio",
-	"Agosto",
-	"Septiembre",
-	"Octubre",
-	"Noviembre",
-	"Diciembre",
+var months = map[time.Month]string{
+	time.January:   "Enero",
+	time.February:  "Febrero",
+	time.March:     "Marzo",
+	time.April:     "Abril",
+	time.May:       "Mayo",
+	time.June:      "Junio",
+	time.July:      "Julio",
+	time.August:    "Agosto",
+	time.September: "Septiembre",
+	time.October:   "Octubre",
+	time.November:  "Noviembre",
+	time.December:  "Diciembre",
 }
 
 func formatTime(t time.Time) (f string) {
+
+	t = t.UTC()
 
 	f = strconv.Itoa(t.Day()) + " " + months[t.Month()]
 
