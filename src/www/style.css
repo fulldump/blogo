@@ -29,13 +29,13 @@ a:hover {
   display: block;
   float: left;
   padding: 4px;
-  height: 48px;
-  width: 48px;
   border-radius: 50%;
 }
 
 .toolbar .cirle-button img {
   display: block;
+  height: 48px;
+  width: 48px;
 }
 
 .toolbar .logo {
