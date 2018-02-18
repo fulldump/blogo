@@ -40,6 +40,26 @@ func (ga *GoogleApi) CreateLink(state string) string {
 		"&response_type=" + url.QueryEscape("code")
 }
 
+func (ga *GoogleApi) CreateLinkWithHost(state, host string) string {
+
+	r, err := url.Parse(ga.RedirectUri)
+	if nil != err {
+		panic(err)
+	}
+
+	r.Host = host
+
+	return "https://accounts.google.com/o/oauth2/v2/auth?" +
+		"client_id=" + url.QueryEscape(ga.ClientId) +
+		"&redirect_uri=" + url.QueryEscape(r.String()) +
+		"&scope=" + url.QueryEscape("https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile") +
+		//"&access_type=" + url.QueryEscape(access_type) +
+		//"&include_granted_scopes=" + url.QueryEscape(include_granted_scopes) +
+		"&state=" + url.QueryEscape(state) +
+		"&prompt=select_account" +
+		"&response_type=" + url.QueryEscape("code")
+}
+
 /*
 To exchange an authorization code for an access token, call the https://www.googleapis.com/oauth2/v4/token endpoint and set the following parameters:
 
@@ -65,6 +85,47 @@ func (ga *GoogleApi) GetAccessToken(code string) (access *GoogleAccess, err erro
 		"&client_id=" + url.QueryEscape(ga.ClientId) +
 		"&client_secret=" + url.QueryEscape(ga.ClientSecret) +
 		"&redirect_uri=" + url.QueryEscape(ga.RedirectUri) +
+		"&grant_type=" + url.QueryEscape("authorization_code")
+
+	req, err := http.NewRequest("POST", endpoint, bytes.NewBufferString(payload))
+	if nil != err {
+		return
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	res, err := http.DefaultClient.Do(req)
+	if nil != err {
+		return
+	}
+
+	access = &GoogleAccess{}
+	if err = json.NewDecoder(res.Body).Decode(&access); nil != err {
+		return
+	}
+
+	if nil != access.Error {
+		err = errors.New(*access.Error + ":" + access.ErrorDescription)
+		return
+	}
+
+	return
+}
+
+func (ga *GoogleApi) GetAccessTokenWithHost(code, host string) (access *GoogleAccess, err error) {
+
+	r, err := url.Parse(ga.RedirectUri)
+	if nil != err {
+		panic(err)
+	}
+
+	r.Host = host
+
+	endpoint := "https://www.googleapis.com/oauth2/v4/token"
+
+	payload := "code=" + url.QueryEscape(code) +
+		"&client_id=" + url.QueryEscape(ga.ClientId) +
+		"&client_secret=" + url.QueryEscape(ga.ClientSecret) +
+		"&redirect_uri=" + url.QueryEscape(r.String()) +
 		"&grant_type=" + url.QueryEscape("authorization_code")
 
 	req, err := http.NewRequest("POST", endpoint, bytes.NewBufferString(payload))

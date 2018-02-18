@@ -24,7 +24,7 @@ func Build(parent *golax.Node, dao_users, dao_sessions *kip.Dao, g *googleapi.Go
 		code := c.Request.URL.Query().Get("code")
 		state := c.Request.URL.Query().Get("state")
 
-		access, err := g.GetAccessToken(code)
+		access, err := g.GetAccessTokenWithHost(code, c.Request.Host)
 		if nil != err {
 			fmt.Println("ERROR:", err)
 			c.Error(http.StatusBadGateway, "Google Auth GetAccessToken communication error")
