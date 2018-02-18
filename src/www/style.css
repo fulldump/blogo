@@ -104,6 +104,7 @@ a:hover {
 .article {
   padding: 16px 32px 16px;
   margin-bottom: 16px;
+  word-wrap: break-word;
 }
 
 .article:hover {
