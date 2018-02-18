@@ -26,11 +26,11 @@ GOBUILD = $(GOCMD) build $(FLAGS)
 all:	build_one
 
 .PHONY: build_one
-build_one:
+build_one: statics
 	$(GOBUILD) -o bin/$(PROJECT) $(PROJECT)
 
 .PHONY: build_all
-build_all:
+build_all: statics
 	@# https://golang.org/doc/install/source
 	GOARCH=amd64 GOOS=linux   $(GOBUILD) -o bin/$(PROJECT).linux64 $(PROJECT)
 	GOARCH=386   GOOS=linux   $(GOBUILD) -o bin/$(PROJECT).linux32 $(PROJECT)
