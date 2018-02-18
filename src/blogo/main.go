@@ -39,7 +39,12 @@ func main() {
 	}
 
 	// Buid API
-	a := api.Build(articles_dao, sessions_dao, users_dao, audits_dao, &c.Google, c.GoogleAnalytics, c.Statics, channel_audits, c)
+	a := api.Build(
+		articles_dao, sessions_dao, users_dao, audits_dao,
+		&c.Google, c.GoogleAnalytics,
+		c.Statics,
+		channel_audits,
+		c)
 
 	// Serve
 	s := &http.Server{

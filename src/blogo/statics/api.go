@@ -29,6 +29,8 @@ func Build(node *golax.Node, statics string) {
 
 		filename := c.Request.URL.Path
 
+		filename = strings.TrimPrefix(filename, "/")
+
 		fmt.Println(filename)
 
 		if strings.HasSuffix(filename, "/") {
