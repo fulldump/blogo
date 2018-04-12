@@ -1,6 +1,6 @@
 function removeArticle(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open('DELETE', '/articles/'+id, true);
+    xhr.open('DELETE', '/v0/articles/'+id, true);
     xhr.onload = function() {
         document.getElementById(id).style.display = 'none';
     };
@@ -10,7 +10,7 @@ function removeArticle(id) {
 function createArticle() {
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/articles', true);
+    xhr.open('POST', '/v0/articles', true);
     xhr.onload = function() {
         window.location.href = '/';
     };
@@ -60,7 +60,7 @@ function logout(e) {
     e.preventDefault();
 
     var xhr = new XMLHttpRequest();
-    xhr.open('DELETE', '/sessions/current', true);
+    xhr.open('DELETE', '/v0/sessions/current', true);
     xhr.onload = function() {
         window.location.reload();
     };

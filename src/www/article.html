@@ -2,6 +2,7 @@
         <section class="article">
             <h1>{{.article.Title}}</h1>
             <time datetime="{{.article.CreateDate }}">{{.article.CreateDate }}</time>
+            by <a href="/@{{.article.User.Nick}}">@{{.article.User.Nick}}</a>
             <p>{{.article.Content}}</p>
         </section>
 

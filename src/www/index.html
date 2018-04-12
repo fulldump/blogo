@@ -2,8 +2,9 @@
 
     {{range .articles}}
     <section class="article" id="{{.Id}}">
-        <h1><a href="/a/{{.Id}}">{{.Title}}</a></h1>
-        <time datetime="{{.CreateDate }}">{{.CreateDate }}</time>
+        <h1><a href="/@{{.User.Nick}}/{{.Id}}">{{.Title}}</a></h1>
+        <time datetime="{{.CreateDate}}">{{.CreateDate}}</time>
+        by <a href="/@{{.User.Nick}}">@{{.User.Nick}}</a>
         <p>{{.Content}}</p>
     </section>
     {{end}}

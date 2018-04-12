@@ -2,10 +2,12 @@ package home
 
 import (
 	"fmt"
+	"googleapi"
 	"html/template"
 	"net/http"
-
-	"googleapi"
+	"strconv"
+	"strings"
+	"time"
 
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
@@ -15,8 +17,6 @@ import (
 	"blogo/httputils"
 	"blogo/statics"
 	"blogo/users"
-	"strconv"
-	"time"
 )
 
 func p(name string, codes ...string) (t *template.Template, err error) {
@@ -31,7 +31,7 @@ func p(name string, codes ...string) (t *template.Template, err error) {
 	return
 }
 
-func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string) {
+func Build(parent *golax.Node, articles_dao, users_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics string) {
 
 	template_html := string(statics.Bytes["template.html"])
 	index_html := string(statics.Bytes["index.html"])
@@ -66,10 +66,76 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 
 	})
 
-	parent.Node("a").Node("{{article_id}}").Method("GET", func(c *golax.Context) {
+	user_regex := "^@[^@]+"
+
+	user_arroba := parent.Node("(" + user_regex + ")")
+	user_arroba.Interceptor(&golax.Interceptor{
+		Before: func(c *golax.Context) {
+
+			user_nick := strings.TrimLeft(c.Parameters[user_regex], "@")
+
+			q := bson.M{
+				"nick": user_nick,
+			}
+
+			user_item, err := users_dao.FindOne(q)
+			if nil != err {
+				c.Error(http.StatusInternalServerError, "Unexpected error reading from persistence layer")
+				return
+			}
+
+			if nil == user_item {
+				// TODO: pretify this with an html page instead of a fucking unfriendly json
+				c.Error(http.StatusNotFound, "User not found!!!")
+				return
+			}
+
+			c.Set("blog_user", user_item.Value)
+
+		},
+	})
+
+	user_arroba.Method("GET", func(c *golax.Context) {
+
+		user := GetBlogUser(c)
+
+		articles_list := []interface{}{}
+
+		q := bson.M{
+			"user.nick": user.Nick,
+		}
+
+		articles_dao.Find(q).Sort("-create_timestamp").ForEach(func(item *kip.Item) {
+			a := item.Value.(*articles.Article)
+
+			articles_list = append(articles_list, formatArticleData(a))
+		})
+
+		err := t_home.Execute(c.Response, map[string]interface{}{
+			"user":              users.GetUser(c),
+			"articles":          articles_list,
+			"google_oauth_link": g.CreateLinkWithHost(c.Request.URL.Path, httputils.GetHost(c.Request)),
+			"google_analytics":  google_analytics,
+		})
+
+		if nil != err {
+			fmt.Println("ERROR:", err)
+			return
+		}
+
+	})
+
+	user_arroba.Node("{{article_id}}").Method("GET", func(c *golax.Context) {
+
+		user := GetBlogUser(c)
 		article_id := c.Parameters["article_id"]
 
-		article_item, err := articles_dao.FindOne(bson.M{"_id": article_id})
+		q := bson.M{
+			"user.nick": user.Nick,
+			"_id":       article_id,
+		}
+
+		article_item, err := articles_dao.FindOne(q)
 		if nil != err {
 			fmt.Println("ERROR:", err)
 			c.Error(http.StatusInternalServerError, "Unexpected error reading from persitence layer.")
@@ -92,6 +158,15 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 
 	})
 
+}
+
+func GetBlogUser(c *golax.Context) *users.User {
+	item, exist := c.Get("blog_user")
+	if exist {
+		return item.(*users.User)
+	}
+
+	return nil
 }
 
 func formatArticleData(a *articles.Article) interface{} {

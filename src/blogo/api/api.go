@@ -1,28 +1,24 @@
 package api
 
 import (
-	"github.com/fulldump/golax"
-	"github.com/fulldump/kip"
-
-	"googleapi"
-
-	"blogo/articles"
-	"blogo/constants"
-	"blogo/home"
-	"blogo/login"
-	"blogo/sessions"
-	"blogo/users"
-
-	"blogo/audits"
-
-	"blogo/statics"
-
-	"blogo/config"
 	"encoding/json"
+	"googleapi"
 	"net/http"
 
 	"github.com/fulldump/apidoc"
 	"github.com/fulldump/goaudit"
+	"github.com/fulldump/golax"
+	"github.com/fulldump/kip"
+
+	"blogo/articles"
+	"blogo/audits"
+	"blogo/config"
+	"blogo/constants"
+	"blogo/home"
+	"blogo/login"
+	"blogo/sessions"
+	"blogo/statics"
+	"blogo/users"
 )
 
 func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *googleapi.GoogleApi, google_analytics, statics_dir string, channel_audits chan *goaudit.Audit, config *config.Config) *golax.Api {
@@ -39,22 +35,24 @@ func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *google
 	api.Root.Interceptor(users.NewUserInterceptor(users_dao))
 	api.Root.Interceptor(golax.InterceptorError)
 
-	home.Build(api.Root, articles_dao, g, google_analytics)
+	home.Build(api.Root, articles_dao, users_dao, g, google_analytics)
+
+	v0 := api.Root.Node("v0")
 
 	// Connect articles API
-	articles.Build(api.Root, articles_dao)
+	articles.Build(v0, articles_dao)
 
 	// Connect sessions API
-	sessions.Build(api.Root, sessions_dao)
+	sessions.Build(v0, sessions_dao)
 
 	// Connect users API
-	users.Build(api.Root, users_dao)
+	users.Build(v0, users_dao)
 
 	// Connect login API
 	login.Build(api.Root, users_dao, sessions_dao, g)
 
 	// Conenct audits API
-	audits.Build(api.Root, audits_dao)
+	audits.Build(v0, audits_dao)
 
 	// Documentation
 	doc := apidoc.Build(api, api.Root)
