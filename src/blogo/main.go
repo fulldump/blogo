@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"blogo/background"
+
 	"github.com/fulldump/goaudit"
 	"github.com/fulldump/kip"
 )
@@ -29,6 +31,8 @@ func main() {
 	sessions_dao := kip.NewDao("sessions", db)
 	users_dao := kip.NewDao("users", db)
 	audits_dao := kip.NewDao("audits", db)
+
+	go background.UsersInArticle(users_dao, articles_dao)
 
 	// audits channel
 	channel_audits := make(chan *goaudit.Audit, 1000000)  // Buffered channel, 100 items

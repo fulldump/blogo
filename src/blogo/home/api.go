@@ -97,7 +97,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao, g *googleapi.GoogleApi, go
 func formatArticleData(a *articles.Article) interface{} {
 	return map[string]interface{}{
 		"Id":              a.Id,
-		"OwnerId":         a.OwnerId,
+		"User":            a.User,
 		"Title":           a.Title,
 		"Content":         a.Content,
 		"CreateTimestamp": a.CreateTimestamp,

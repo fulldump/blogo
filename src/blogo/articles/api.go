@@ -50,7 +50,11 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 
 		article := item.Value.(*Article)
 		article.CreateTimestamp = time.Now().UnixNano()
-		article.OwnerId = user.Id
+		article.User = User{
+			Id:            user.Id,
+			Nick:          user.Nick,
+			SyncTimestamp: time.Now().UnixNano(),
+		}
 
 		if err := item.Save(); nil != err {
 			fmt.Println(err)
