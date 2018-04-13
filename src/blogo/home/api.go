@@ -125,7 +125,7 @@ func Build(parent *golax.Node, articles_dao, users_dao *kip.Dao, g *googleapi.Go
 
 	})
 
-	user_arroba.Node("{{title_url}}").Method("GET", func(c *golax.Context) {
+	user_arroba.Node("{title_url}").Method("GET", func(c *golax.Context) {
 
 		user := GetBlogUser(c)
 		title_url := c.Parameters["title_url"]
