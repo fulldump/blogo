@@ -23,13 +23,17 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 
 			fmt.Println(c.Request.Header, "proto:", c.Request.Proto)
 
-			host := c.Request.Host
+			proto := c.Request.Header.Get("X-Forwarded-Proto")
+
+			host := c.Request.Header.Get("X-Forwarded-Host")
+
+			url_prefix := proto + "://" + host
 
 			articles_dao.Find(nil).ForEach(func(article_item *kip.Item) {
 
 				article := article_item.Value.(*articles.Article)
 
-				loc := "https://" + host + "/@" + article.User.Nick + "/" + article.TitleUrl
+				loc := url_prefix + "/@" + article.User.Nick + "/" + article.TitleUrl
 				lastmod := time.Unix(0, article.CreateTimestamp).Format(time.RFC3339)
 
 				c.Response.Write([]byte(`<url>
