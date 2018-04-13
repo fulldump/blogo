@@ -17,6 +17,7 @@ import (
 	"blogo/home"
 	"blogo/login"
 	"blogo/sessions"
+	"blogo/sitemap"
 	"blogo/statics"
 	"blogo/users"
 )
@@ -36,6 +37,8 @@ func Build(articles_dao, sessions_dao, users_dao, audits_dao *kip.Dao, g *google
 	api.Root.Interceptor(golax.InterceptorError)
 
 	home.Build(api.Root, articles_dao, users_dao, g, google_analytics)
+
+	sitemap.Build(api.Root, articles_dao)
 
 	v0 := api.Root.Node("v0")
 
