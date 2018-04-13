@@ -1,9 +1,10 @@
 package articles
 
 type Article struct {
-	Id      string `bson:"_id" json:"id"`
-	Title   string `bson:"title" json:"title"`
-	Content string `bson:"content" json:"content"`
+	Id       string `bson:"_id" json:"id"`
+	Title    string `bson:"title" json:"title"`
+	TitleUrl string `bson:"title_url" json:"-"`
+	Content  string `bson:"content" json:"content"`
 
 	// TODO: remove deprecated:
 	OwnerId string `bson:"owner_id" json:"owner_id"`

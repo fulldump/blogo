@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"blogo/users"
-
+	"strings"
 	"time"
 
 	"github.com/fulldump/golax"
 	"github.com/fulldump/kip"
+
+	"blogo/users"
 )
 
 func Build(parent *golax.Node, articles_dao *kip.Dao) {
@@ -49,6 +49,7 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 		json.NewDecoder(c.Request.Body).Decode(&item.Value)
 
 		article := item.Value.(*Article)
+		article.TitleUrl = UrlizeTitle(article.Title)
 		article.CreateTimestamp = time.Now().UnixNano()
 		article.User = User{
 			Id:            user.Id,
@@ -123,4 +124,14 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 		c.Response.WriteHeader(http.StatusNoContent)
 	})
 
+}
+
+func UrlizeTitle(s string) string {
+
+	s = strings.Replace(s, " ", "-", -1)
+
+	s = strings.Replace(s, "--", "-", -1)
+	s = strings.Replace(s, "--", "-", -1)
+
+	return s
 }

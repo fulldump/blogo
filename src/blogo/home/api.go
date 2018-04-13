@@ -125,14 +125,14 @@ func Build(parent *golax.Node, articles_dao, users_dao *kip.Dao, g *googleapi.Go
 
 	})
 
-	user_arroba.Node("{{article_id}}").Method("GET", func(c *golax.Context) {
+	user_arroba.Node("{{title_url}}").Method("GET", func(c *golax.Context) {
 
 		user := GetBlogUser(c)
-		article_id := c.Parameters["article_id"]
+		title_url := c.Parameters["title_url"]
 
 		q := bson.M{
 			"user.nick": user.Nick,
-			"_id":       article_id,
+			"title_url": title_url,
 		}
 
 		article_item, err := articles_dao.FindOne(q)
@@ -174,6 +174,7 @@ func formatArticleData(a *articles.Article) interface{} {
 		"Id":              a.Id,
 		"User":            a.User,
 		"Title":           a.Title,
+		"TitleUrl":        a.TitleUrl,
 		"Content":         a.Content,
 		"CreateTimestamp": a.CreateTimestamp,
 		"CreateDate":      formatTime(time.Unix(0, a.CreateTimestamp)),

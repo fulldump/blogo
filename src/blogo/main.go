@@ -33,6 +33,7 @@ func main() {
 	audits_dao := kip.NewDao("audits", db)
 
 	go background.UsersInArticle(users_dao, articles_dao)
+	go background.TitleUrlize(articles_dao)
 
 	// audits channel
 	channel_audits := make(chan *goaudit.Audit, 1000000)  // Buffered channel, 100 items
