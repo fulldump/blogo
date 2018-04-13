@@ -70,6 +70,6 @@ function logout(e) {
 
 function anchorizeArticles() {
     document.querySelectorAll('section.article p').forEach(function (item) {
-        item.innerHTML = anchorme.js(item.innerHTML);
+        item.innerHTML = anchorme(item.innerHTML);
     });
 }
