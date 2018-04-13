@@ -6,9 +6,7 @@ type Article struct {
 	TitleUrl string `bson:"title_url" json:"-"`
 	Content  string `bson:"content" json:"content"`
 
-	// TODO: remove deprecated:
-	OwnerId string `bson:"owner_id" json:"owner_id"`
-	User    User   `bson:"user" json:"user"`
+	User User `bson:"user" json:"user"`
 
 	CreateTimestamp int64 `bson:"create_timestamp" json:"create_timestamp"`
 }

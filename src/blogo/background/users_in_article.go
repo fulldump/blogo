@@ -29,29 +29,17 @@ func UsersInArticle(users_dao, articles_dao *kip.Dao) {
 			},
 		}
 
-		fmt.Println("articles:")
-
 		articles_dao.Find(q).ForEach(func(article_item *kip.Item) {
 
 			article := article_item.Value.(*articles.Article)
-
-			fmt.Println("article:", article.Title)
-
-			user_id := article.OwnerId
-			if "" == user_id {
-				user_id = article.User.Id
-			}
-
-			fmt.Println("     userid:", user_id)
+			user_id := article.User.Id
 
 			user_item, err := users_dao.FindById(user_id)
 			if nil != err {
-				fmt.Println("ERROR:", err)
 				return
 			}
 
 			if user_item == nil {
-				fmt.Println("    NOUSER")
 				return
 			}
 
