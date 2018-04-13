@@ -15,6 +15,8 @@ func Build(parent *golax.Node, articles_dao *kip.Dao) {
 	parent.Node("sitemap.xml").
 		Method("GET", func(c *golax.Context) {
 
+			c.Response.Header().Set("Content-Type", "text/xml; charset=UTF-8")
+
 			c.Response.Write([]byte(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" 
