@@ -21,8 +21,8 @@ a:hover {
   left: 0;
   right: 0;
   min-height: 54px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background-color: rgba(255,255,255,0.95);
 }
 
 .toolbar .cirle-button {
@@ -214,5 +214,24 @@ a:hover {
   border-color: #adadad;
 }
 
+@media screen and (max-width: 800px) {
+  .toolbar .logo {
+    text-align: left;
+  }
 
+  .main .wcenter {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .article {
+    padding-left: 16px;
+    padding-right: 16px;
+    border-bottom: solid #F0F0F0 1px;
+  }
+
+  .article:hover {
+    box-shadow: none;
+  }
+}
 

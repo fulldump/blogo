@@ -24,34 +24,6 @@
 	</head>
 	<body>
 
-        {{if .user}}
-        {{else}}
-        <div id="login-panel" component="login-panel">
-            <form id="form-login">
-                <label for="login-email">
-                    Usuario: <input type="text" id="login-email" placeholder="tu@email.com">
-                </label>
-
-                <label for="login-password">
-                    Contraseña: <input type="password" id="login-password" placeholder="contraseña">
-                </label>
-
-                <div style="text-align: center;">
-                    <br>
-                    <button component="TrunkButton">Entrar</button>
-                </div>
-
-                <br><br><br>
-
-                <div style="text-align: center;">
-                    También puedes <a href="{{ .google_oauth_link }}">entrar con Google</a>.
-                </div>
-            </form>
-            <script>
-                document.getElementById('form-login').addEventListener('submit', login, true);
-            </script>
-        </div>
-        {{end}}
 
         <div class="toolbar">
             <div class="wcenter">
@@ -102,5 +74,35 @@
                 Blogo es software libre hecho con ❤️ en España, <a href="https://github.com/fulldump/blogo">colabora en GitHub</a>.
             </div>
         </div>
+
+        {{if .user}}
+        {{else}}
+        <div id="login-panel" component="login-panel">
+            <form id="form-login">
+                <label for="login-email">
+                    Usuario: <input type="text" id="login-email" placeholder="tu@email.com">
+                </label>
+
+                <label for="login-password">
+                    Contraseña: <input type="password" id="login-password" placeholder="contraseña">
+                </label>
+
+                <div style="text-align: center;">
+                    <br>
+                    <button component="TrunkButton">Entrar</button>
+                </div>
+
+                <br><br><br>
+
+                <div style="text-align: center;">
+                    También puedes <a href="{{ .google_oauth_link }}">entrar con Google</a>.
+                </div>
+            </form>
+            <script>
+                document.getElementById('form-login').addEventListener('submit', login, true);
+            </script>
+        </div>
+        {{end}}
+
 	</body>
 </html>
