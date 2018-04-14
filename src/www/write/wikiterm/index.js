@@ -148,7 +148,7 @@
         }, true);
 
         var bar = this.bar = new WikiEditBar();
-        this.dom.insertBefore(bar.dom, this.content);
+        this.dom.insertBefore(bar.dom, this.title);
 
         bar.addGroup('title')
             .addButtons('title')
@@ -213,11 +213,14 @@
             .addButtons('code', function(event) {
                 terrain.insertCode();
             })
+            /*
             .addButtons('image', function(event) {
                 input_image.click();
             })
+            //*/
         ;
 
+        /*
         bar.addGroup('links')
             .addButtons('file', function(event) {
                 input_file.click();
@@ -231,13 +234,14 @@
                 terrain.insertExternalLink(href);
             })
         ;
+        //*/
 
-        bar.addGroup('buttonss')
-            .addButtons('publish', function(event) {
-                context.term.publish(function(a,b,c) {
-                    console.log('publish callback:', a, b, c);
-                });
+        var big_buttons = bar.addGroup('big_buttons');
+        big_buttons.addButton('publish', function(event) {
+            context.term.publish(function(a,b,c) {
+                console.log('publish callback:', a, b, c);
             });
+        }).setText('Publish');
 
         editor.addEventListener('blur', function(e) {
             console.log('TODO: save draft', that.hash, editor.innerHTML);

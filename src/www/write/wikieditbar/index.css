@@ -128,6 +128,19 @@
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC2klEQVRYw+2VT0+cVRTGf899ZximNcg0baxRo2mI1dhB6mve4nQSMi2ByKIxRupHcOkXMCGu/QwuTFyxcEEILUVDSNoCIqiMGUNDUgyW1EjokBbN/Hnv6aK2ArbIny66mGd5n3PP/SXnnHugoYYaaugZlnLdV96NopGWx9umzp7LUf782IknJcgVLp3MFS6d3OkR9yQjf+7bbOD4qqk18fFjk/eMfpiQ+4bAfxF2jR/d7ofh0CElg8+UcJ+2t48e3jOAd34VUZP0Xhj+kNzqDgbCnQPugqKmpmr79vuplsMvCoWSbs/P9/y1Z4DySnkVowg+m3j+1pHN3pneY684KcL4Gun3hKML0JbEyVoWLGNmMyDbM0CpdLFqZjOGXhapV7dc8tVOzDLeMyps0kyFjvzIpjIMOLOgA1GWdwv76gGAemxTGJZIBGceHfYPBoHoRBTvyX713sYlXkqngzf/rX/YLPksMHs7Wbu1bwD9rSWw34RFD/sgd6f1BVDkjWvzY70bcVydM2M9kBUeliHdmj4uudcxTS9e7qvsG2B9fb0M/GLiVCqzduyf4w6koxbH1wBS8XN/ANfB5cPusRYAc/4tsIzFFP9v1ncEKJUuVkHfYxwXOgEDTrKzwhbK9btFgImJQt2jcaCt2TgNIKcsxorJbhwIACCO9ZNELBefDrvCI07KeW/TpYn+jUe9Yn4OcU+BnQ/DoUPAOwY/Vu7c/PPAAEGltoRpGQhTyeYIeA3Z9ObRWrsZr2BMY5xNtSbflnEKNDs7+0ntwABXr76/avJTknvDOfoMlr1t/Lw5ZnGxr4JnAqc2BUE/UtrH9eJu/nu3i5VgFmsSaAM+MJiaHJtf/U+pnJ8RVpH0kZkt1UjceEoAUKvVr5sxDMx5s2H43G+PmbzSu+DNf4m3ZTMbnPmue+2prsYoGmnJ5oczO0cNuAeLybTrlbuboAsXzPYDPTQk0VBDDT3rug/4XSMqJ/8IsQAAAABJRU5ErkJggg==');
 }
 
+[data-component="WikiEditBar"] button[with-text="true"] {
+  color: dodgerblue;
+  border: solid dodgerblue 1px;
+  width: auto;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+[data-component="WikiEditBar"] button[with-text="true"]:hover {
+  background-color: #6495ed2e;
+}
+
 [data-component="WikiEditBar"] .group#title {
   overflow: hidden;
 }

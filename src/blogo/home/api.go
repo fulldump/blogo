@@ -170,6 +170,9 @@ func GetBlogUser(c *golax.Context) *users.User {
 }
 
 func formatArticleData(a *articles.Article) interface{} {
+
+	createTime := time.Unix(0, a.CreateTimestamp).UTC()
+
 	return map[string]interface{}{
 		"Id":              a.Id,
 		"User":            a.User,
@@ -177,7 +180,8 @@ func formatArticleData(a *articles.Article) interface{} {
 		"TitleUrl":        a.TitleUrl,
 		"Content":         a.Content,
 		"CreateTimestamp": a.CreateTimestamp,
-		"CreateDate":      formatTime(time.Unix(0, a.CreateTimestamp)),
+		"CreateRFC3339":   createTime.Format(time.RFC3339),
+		"CreateDate":      formatTime(createTime),
 	}
 }
 

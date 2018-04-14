@@ -8,6 +8,11 @@
         this.dom.setAttribute('id', name);
     };
 
+    Button.prototype.setText = function(text) {
+        this.dom.setAttribute('with-text', true);
+        this.dom.textContent = text;
+    };
+
     var Group = function(name) {
 
         this.name = name;
