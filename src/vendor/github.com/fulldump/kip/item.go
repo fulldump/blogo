@@ -96,6 +96,31 @@ func (i *Item) Patch(p *Patch) error {
 
 		i.updated = false
 		return nil
+	} else if "remove_from_set" == p.Operation {
+		if nil == i.updates {
+			i.updates = &bson.M{}
+		}
+
+		u := *i.updates
+
+		if _, exists := u["$pull"]; !exists {
+			u["$pull"] = bson.M{}
+		}
+
+		c := u["$pull"].(bson.M)
+
+		if _, exists := c[p.Key]; !exists {
+			c[p.Key] = bson.M{
+				"$in": []interface{}{},
+			}
+		}
+
+		f := c[p.Key].(bson.M)["$in"].([]interface{})
+
+		c[p.Key].(bson.M)["$in"] = append(f, p.Value)
+
+		i.updated = false
+		return nil
 	}
 
 	return errors.New("invalid operation")

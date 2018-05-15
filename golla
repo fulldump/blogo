@@ -1,0 +1,13 @@
+# Golla dependencies for project 'PROJECT_TEMPLATE'
+
+# Add golla.go itself (master) branch
+git@github.com:fulldump/golla>golla.go -> golla.go
+
+git@github.com:fulldump/apidoc.git -> src/vendor/github.com/fulldump/apidoc
+git@github.com:fulldump/goconfig.git -> src/vendor/github.com/fulldump/goconfig
+git@github.com:fulldump/golax.git -> src/vendor/github.com/fulldump/golax
+git@github.com:fulldump/kip.git -> src/vendor/github.com/fulldump/kip
+git@github.com:satori/go.uuid.git -> src/vendor/github.com/satori/go.uuid
+
+https://gopkg.in/mgo.v2 -> src/vendor/gopkg.in/mgo.v2
+
