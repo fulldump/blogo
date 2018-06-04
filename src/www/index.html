@@ -1,7 +1,7 @@
 {{define "content"}}
 
     {{range .articles}}
-    <section class="article" id="{{.Id}}">
+    <section class="article" id="{{.Id}}" component="Terrain">
         <h1><a href="/@{{.User.Nick}}/{{.TitleUrl}}">{{.Title}}</a></h1>
         <time datetime="{{.CreateDate}}">{{.CreateDate}}</time>
         by <a href="/@{{.User.Nick}}">@{{.User.Nick}}</a>
