@@ -178,7 +178,7 @@ func formatArticleData(a *articles.Article) interface{} {
 		"User":            a.User,
 		"Title":           a.Title,
 		"TitleUrl":        a.TitleUrl,
-		"Content":         a.Content,
+		"Content":         template.HTML(a.Content),
 		"CreateTimestamp": a.CreateTimestamp,
 		"CreateRFC3339":   createTime.Format(time.RFC3339),
 		"CreateDate":      formatTime(createTime),

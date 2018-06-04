@@ -239,8 +239,20 @@
         var big_buttons = bar.addGroup('big_buttons');
         big_buttons.addButton('publish', function(event) {
             context.term.publish(function(a,b,c) {
-                console.log('publish callback:', a, b, c);
-            });
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/v0/articles', true);
+				xhr.onload = function() {
+					window.location.href = '/';
+				};
+
+				var payload = {
+					"title": document.getElementById('article-title').textContent,
+					"content": editor.innerHTML,
+				};
+
+				xhr.send(JSON.stringify(payload));
+			});
         }).setText('Publish');
 
         editor.addEventListener('blur', function(e) {
