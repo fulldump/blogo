@@ -10,4 +10,3 @@ git@github.com:fulldump/kip.git -> src/vendor/github.com/fulldump/kip
 git@github.com:satori/go.uuid.git -> src/vendor/github.com/satori/go.uuid
 
 https://gopkg.in/mgo.v2 -> src/vendor/gopkg.in/mgo.v2
-
